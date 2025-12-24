@@ -1,0 +1,26 @@
+# Runtime environments configuration for interactive exercises
+
+pyodide:
+  version: "0.24.1"
+  cdn_url: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+  default_packages:
+    - numpy
+    - pandas
+    - matplotlib
+  timeout_ms: 30000
+
+jupyterlite:
+  base_url: "https://jupyterlite.github.io/demo"
+  enabled: true
+
+colab:
+  enabled: true
+
+sql:
+  version: "1.8.0"
+  cdn_url: "https://sql.js.org/dist/"
+
+defaults:
+  allow_hints: true
+  show_solution_after_attempts: 3
+  max_attempts: null

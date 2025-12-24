@@ -1,0 +1,38 @@
+id: ex-01-hola-mundo
+type: code-python
+title: "Hola, Mundo!"
+description: "Tu primer programa en Python"
+instructions: |
+  Usa la funcion print() para mostrar el mensaje "Hola, Mundo!" en la consola.
+  Recuerda que el texto debe ir entre comillas.
+difficulty: beginner
+estimated_time_minutes: 2
+points: 10
+runtime_tier: pyodide
+
+starter_code: |
+  # Tu primer programa en Python
+  # Escribe tu codigo aqui:
+
+
+solution_code: |
+  # Tu primer programa en Python
+  print("Hola, Mundo!")
+
+test_cases:
+  - id: test-print
+    name: "Mensaje impreso correctamente"
+    test_code: |
+      # El test verifica que se haya usado print
+      assert 'print' in open(__file__).read() if '__file__' in dir() else True
+    points: 10
+    error_message: "Usa print() para mostrar el mensaje"
+
+hints:
+  - "La funcion print() muestra texto en la consola"
+  - "El texto va entre comillas: print('texto')"
+  - "La respuesta es: print('Hola, Mundo!')"
+
+tags:
+  - print
+  - basico

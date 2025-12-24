@@ -1,0 +1,106 @@
+id: ex-07-elif
+type: code-python
+title: "Clasificador de notas"
+description: "Usa elif para clasificar una nota en letras"
+instructions: |
+  Escribe un programa que clasifique una nota numerica en letras:
+  - 90 o mas: "A"
+  - 80 a 89: "B"
+  - 70 a 79: "C"
+  - 60 a 69: "D"
+  - Menos de 60: "F"
+
+  Guarda el resultado en la variable 'calificacion'.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Nota a clasificar
+  nota = 85
+
+  # Clasifica la nota usando if-elif-else:
+
+
+
+  # Imprime el resultado
+  print(f"Nota: {nota} = {calificacion}")
+
+solution_code: |
+  # Nota a clasificar
+  nota = 85
+
+  # Clasifica la nota usando if-elif-else:
+  if nota >= 90:
+      calificacion = "A"
+  elif nota >= 80:
+      calificacion = "B"
+  elif nota >= 70:
+      calificacion = "C"
+  elif nota >= 60:
+      calificacion = "D"
+  else:
+      calificacion = "F"
+
+  # Imprime el resultado
+  print(f"Nota: {nota} = {calificacion}")
+
+test_cases:
+  - id: test-a
+    name: "Nota 95 es A"
+    test_code: |
+      nota = 95
+      if nota >= 90:
+          calificacion = "A"
+      elif nota >= 80:
+          calificacion = "B"
+      elif nota >= 70:
+          calificacion = "C"
+      elif nota >= 60:
+          calificacion = "D"
+      else:
+          calificacion = "F"
+      assert calificacion == "A"
+    points: 5
+
+  - id: test-b
+    name: "Nota 85 es B"
+    test_code: |
+      assert calificacion == "B", f"Con nota=85, deberia ser B, obtuviste {calificacion}"
+    points: 5
+    error_message: "85 deberia dar calificacion B"
+
+  - id: test-f
+    name: "Nota 50 es F"
+    test_code: |
+      nota = 50
+      if nota >= 90:
+          calif = "A"
+      elif nota >= 80:
+          calif = "B"
+      elif nota >= 70:
+          calif = "C"
+      elif nota >= 60:
+          calif = "D"
+      else:
+          calif = "F"
+      assert calif == "F"
+    points: 5
+
+  - id: test-variable
+    name: "Variable calificacion existe"
+    test_code: |
+      assert 'calificacion' in dir()
+    points: 5
+
+hints:
+  - "Empieza con if nota >= 90:"
+  - "Luego usa elif para cada rango"
+  - "El orden importa: de mayor a menor"
+  - "else captura todo lo menor a 60"
+
+tags:
+  - if
+  - elif
+  - else

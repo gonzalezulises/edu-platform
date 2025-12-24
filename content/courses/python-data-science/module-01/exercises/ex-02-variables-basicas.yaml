@@ -1,0 +1,73 @@
+id: ex-02-variables-basicas
+type: code-python
+title: "Creando variables"
+description: "Aprende a crear variables y asignarles valores"
+instructions: |
+  Crea las siguientes variables:
+  1. Una variable llamada 'nombre' con tu nombre (un string)
+  2. Una variable llamada 'edad' con tu edad (un numero entero)
+  3. Imprime ambas variables usando print()
+difficulty: beginner
+estimated_time_minutes: 5
+points: 15
+runtime_tier: pyodide
+
+starter_code: |
+  # Crea tus variables aqui:
+
+  # 1. Variable nombre (string)
+  nombre =
+
+  # 2. Variable edad (entero)
+  edad =
+
+  # 3. Imprime las variables
+  print(nombre)
+  print(edad)
+
+solution_code: |
+  # Crea tus variables aqui:
+
+  # 1. Variable nombre (string)
+  nombre = "Maria"
+
+  # 2. Variable edad (entero)
+  edad = 25
+
+  # 3. Imprime las variables
+  print(nombre)
+  print(edad)
+
+test_cases:
+  - id: test-nombre
+    name: "Variable nombre existe y es string"
+    test_code: |
+      assert 'nombre' in dir(), "Debes crear una variable llamada 'nombre'"
+      assert isinstance(nombre, str), "nombre debe ser un string (texto entre comillas)"
+      assert len(nombre) > 0, "nombre no puede estar vacio"
+    points: 5
+    error_message: "Crea la variable 'nombre' con un texto"
+
+  - id: test-edad
+    name: "Variable edad existe y es entero"
+    test_code: |
+      assert 'edad' in dir(), "Debes crear una variable llamada 'edad'"
+      assert isinstance(edad, int), "edad debe ser un numero entero"
+      assert edad > 0, "edad debe ser un numero positivo"
+    points: 5
+    error_message: "Crea la variable 'edad' con un numero entero"
+
+  - id: test-print
+    name: "Variables impresas"
+    test_code: |
+      assert True  # Las variables se imprimen automaticamente
+    points: 5
+
+hints:
+  - "Los strings se escriben entre comillas: nombre = 'Maria'"
+  - "Los enteros se escriben sin comillas: edad = 25"
+  - "Asegurate de no dejar el signo = solo"
+
+tags:
+  - variables
+  - tipos

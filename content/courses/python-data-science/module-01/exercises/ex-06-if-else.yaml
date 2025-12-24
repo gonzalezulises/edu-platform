@@ -1,0 +1,73 @@
+id: ex-06-if-else
+type: code-python
+title: "Decisiones con if-else"
+description: "Aprende a tomar decisiones en tu codigo"
+instructions: |
+  Escribe un programa que verifique si una persona es mayor de edad.
+
+  Si la variable 'edad' es mayor o igual a 18:
+    - Asigna "Mayor de edad" a la variable 'resultado'
+
+  Si no:
+    - Asigna "Menor de edad" a la variable 'resultado'
+difficulty: beginner
+estimated_time_minutes: 5
+points: 15
+runtime_tier: pyodide
+
+starter_code: |
+  # Variable con la edad
+  edad = 20
+
+  # Escribe tu if-else aqui:
+  # Si edad >= 18, resultado = "Mayor de edad"
+  # Si no, resultado = "Menor de edad"
+
+
+
+  # Imprime el resultado
+  print(resultado)
+
+solution_code: |
+  # Variable con la edad
+  edad = 20
+
+  # Escribe tu if-else aqui:
+  if edad >= 18:
+      resultado = "Mayor de edad"
+  else:
+      resultado = "Menor de edad"
+
+  # Imprime el resultado
+  print(resultado)
+
+test_cases:
+  - id: test-mayor
+    name: "Detecta mayor de edad"
+    test_code: |
+      edad = 20
+      if edad >= 18:
+          resultado = "Mayor de edad"
+      else:
+          resultado = "Menor de edad"
+      assert resultado == "Mayor de edad"
+    points: 8
+    error_message: "Con edad=20 deberia ser 'Mayor de edad'"
+
+  - id: test-variable
+    name: "Variable resultado existe"
+    test_code: |
+      assert 'resultado' in dir(), "Debes crear la variable 'resultado'"
+    points: 7
+    error_message: "Crea la variable 'resultado' dentro del if-else"
+
+hints:
+  - "Estructura: if condicion:"
+  - "No olvides los dos puntos : al final del if"
+  - "El codigo dentro del if debe estar indentado (4 espacios)"
+  - "else: tambien lleva dos puntos"
+
+tags:
+  - if
+  - else
+  - control

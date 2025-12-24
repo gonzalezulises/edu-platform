@@ -1,0 +1,98 @@
+id: ex-03-tipos-datos
+type: code-python
+title: "Tipos de datos"
+description: "Practica con los diferentes tipos de datos de Python"
+instructions: |
+  Crea una variable de cada tipo:
+  1. 'mensaje' - un string con cualquier texto
+  2. 'cantidad' - un numero entero
+  3. 'precio' - un numero decimal (float)
+  4. 'activo' - un booleano True
+
+  Luego imprime el tipo de cada variable usando type()
+difficulty: beginner
+estimated_time_minutes: 8
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Crea las variables de cada tipo:
+
+  # String
+  mensaje =
+
+  # Integer
+  cantidad =
+
+  # Float (numero decimal)
+  precio =
+
+  # Boolean
+  activo =
+
+  # Imprime el tipo de cada variable
+  print(type(mensaje))
+  print(type(cantidad))
+  print(type(precio))
+  print(type(activo))
+
+solution_code: |
+  # Crea las variables de cada tipo:
+
+  # String
+  mensaje = "Hola Python"
+
+  # Integer
+  cantidad = 42
+
+  # Float (numero decimal)
+  precio = 19.99
+
+  # Boolean
+  activo = True
+
+  # Imprime el tipo de cada variable
+  print(type(mensaje))
+  print(type(cantidad))
+  print(type(precio))
+  print(type(activo))
+
+test_cases:
+  - id: test-string
+    name: "mensaje es un string"
+    test_code: |
+      assert isinstance(mensaje, str), "mensaje debe ser un string"
+    points: 5
+    error_message: "mensaje debe ser texto entre comillas"
+
+  - id: test-int
+    name: "cantidad es un entero"
+    test_code: |
+      assert isinstance(cantidad, int), "cantidad debe ser un entero"
+    points: 5
+    error_message: "cantidad debe ser un numero entero (sin decimales)"
+
+  - id: test-float
+    name: "precio es un float"
+    test_code: |
+      assert isinstance(precio, float), "precio debe ser un float"
+    points: 5
+    error_message: "precio debe ser un numero decimal (ej: 19.99)"
+
+  - id: test-bool
+    name: "activo es un booleano"
+    test_code: |
+      assert isinstance(activo, bool), "activo debe ser True o False"
+      assert activo == True, "activo debe ser True"
+    points: 5
+    error_message: "activo debe ser True (con T mayuscula)"
+
+hints:
+  - "String: usa comillas -> 'texto' o \"texto\""
+  - "Integer: numero sin punto decimal -> 42"
+  - "Float: numero con punto decimal -> 3.14"
+  - "Boolean: True o False (con mayuscula)"
+
+tags:
+  - tipos
+  - type

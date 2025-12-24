@@ -1,0 +1,105 @@
+id: ex-05-comparaciones
+type: code-python
+title: "Comparando valores"
+description: "Practica con operadores de comparacion"
+instructions: |
+  Dadas las variables a=10 y b=5, evalua las siguientes comparaciones:
+  1. es_igual: a es igual a b?
+  2. es_mayor: a es mayor que b?
+  3. es_menor_igual: a es menor o igual a 10?
+  4. es_diferente: a es diferente de b?
+
+  Cada variable debe contener True o False.
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Variables dadas
+  a = 10
+  b = 5
+
+  # Realiza las comparaciones:
+
+  # 1. a es igual a b?
+  es_igual =
+
+  # 2. a es mayor que b?
+  es_mayor =
+
+  # 3. a es menor o igual a 10?
+  es_menor_igual =
+
+  # 4. a es diferente de b?
+  es_diferente =
+
+  # Imprime los resultados
+  print(f"a == b: {es_igual}")
+  print(f"a > b: {es_mayor}")
+  print(f"a <= 10: {es_menor_igual}")
+  print(f"a != b: {es_diferente}")
+
+solution_code: |
+  # Variables dadas
+  a = 10
+  b = 5
+
+  # Realiza las comparaciones:
+
+  # 1. a es igual a b?
+  es_igual = a == b
+
+  # 2. a es mayor que b?
+  es_mayor = a > b
+
+  # 3. a es menor o igual a 10?
+  es_menor_igual = a <= 10
+
+  # 4. a es diferente de b?
+  es_diferente = a != b
+
+  # Imprime los resultados
+  print(f"a == b: {es_igual}")
+  print(f"a > b: {es_mayor}")
+  print(f"a <= 10: {es_menor_igual}")
+  print(f"a != b: {es_diferente}")
+
+test_cases:
+  - id: test-igual
+    name: "Comparacion de igualdad"
+    test_code: |
+      assert es_igual == False, "10 no es igual a 5"
+    points: 5
+    error_message: "a == b deberia ser False (10 no es igual a 5)"
+
+  - id: test-mayor
+    name: "Comparacion mayor que"
+    test_code: |
+      assert es_mayor == True, "10 es mayor que 5"
+    points: 5
+    error_message: "a > b deberia ser True (10 es mayor que 5)"
+
+  - id: test-menor-igual
+    name: "Comparacion menor o igual"
+    test_code: |
+      assert es_menor_igual == True, "10 es menor o igual a 10"
+    points: 5
+    error_message: "a <= 10 deberia ser True"
+
+  - id: test-diferente
+    name: "Comparacion diferente"
+    test_code: |
+      assert es_diferente == True, "10 es diferente de 5"
+    points: 5
+    error_message: "a != b deberia ser True"
+
+hints:
+  - "Igualdad: usa == (dos signos igual)"
+  - "Mayor que: usa >"
+  - "Menor o igual: usa <="
+  - "Diferente: usa !="
+
+tags:
+  - operadores
+  - comparacion

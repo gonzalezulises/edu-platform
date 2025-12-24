@@ -1,0 +1,76 @@
+id: ex-08-crear-lista
+type: code-python
+title: "Creando listas"
+description: "Aprende a crear y manipular listas"
+instructions: |
+  1. Crea una lista llamada 'frutas' con: "manzana", "banana", "naranja"
+  2. Agrega "pera" al final de la lista usando append()
+  3. Cambia "banana" por "fresa" (esta en el indice 1)
+  4. Imprime la lista final
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # 1. Crea la lista con 3 frutas
+  frutas =
+
+  # 2. Agrega "pera" al final
+
+
+  # 3. Cambia "banana" (indice 1) por "fresa"
+
+
+  # 4. Imprime la lista
+  print(frutas)
+  print(f"La lista tiene {len(frutas)} elementos")
+
+solution_code: |
+  # 1. Crea la lista con 3 frutas
+  frutas = ["manzana", "banana", "naranja"]
+
+  # 2. Agrega "pera" al final
+  frutas.append("pera")
+
+  # 3. Cambia "banana" (indice 1) por "fresa"
+  frutas[1] = "fresa"
+
+  # 4. Imprime la lista
+  print(frutas)
+  print(f"La lista tiene {len(frutas)} elementos")
+
+test_cases:
+  - id: test-lista
+    name: "Lista creada correctamente"
+    test_code: |
+      assert isinstance(frutas, list), "frutas debe ser una lista"
+    points: 5
+
+  - id: test-length
+    name: "Lista tiene 4 elementos"
+    test_code: |
+      assert len(frutas) == 4, f"La lista debe tener 4 elementos, tiene {len(frutas)}"
+    points: 5
+
+  - id: test-pera
+    name: "Contiene pera"
+    test_code: |
+      assert "pera" in frutas, "La lista debe contener 'pera'"
+    points: 5
+
+  - id: test-fresa
+    name: "Contiene fresa en lugar de banana"
+    test_code: |
+      assert "fresa" in frutas, "Debes cambiar 'banana' por 'fresa'"
+      assert "banana" not in frutas, "Ya no debe estar 'banana'"
+    points: 5
+
+hints:
+  - "Lista: frutas = ['manzana', 'banana', 'naranja']"
+  - "Agregar: frutas.append('pera')"
+  - "Cambiar: frutas[1] = 'fresa'"
+
+tags:
+  - listas
+  - append

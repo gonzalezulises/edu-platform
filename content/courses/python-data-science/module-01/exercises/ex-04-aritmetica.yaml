@@ -1,0 +1,112 @@
+id: ex-04-aritmetica
+type: code-python
+title: "Calculadora Python"
+description: "Practica operaciones aritmeticas basicas"
+instructions: |
+  Realiza las siguientes operaciones y guarda cada resultado en la variable indicada:
+  1. suma: 15 + 27
+  2. resta: 100 - 37
+  3. producto: 8 * 7
+  4. division: 45 / 5
+  5. potencia: 2 elevado a la 8 (usa **)
+difficulty: beginner
+estimated_time_minutes: 5
+points: 25
+runtime_tier: pyodide
+
+starter_code: |
+  # Realiza las operaciones:
+
+  # 1. Suma de 15 + 27
+  suma =
+
+  # 2. Resta de 100 - 37
+  resta =
+
+  # 3. Multiplicacion de 8 * 7
+  producto =
+
+  # 4. Division de 45 / 5
+  division =
+
+  # 5. Potencia: 2 elevado a la 8
+  potencia =
+
+  # Imprime los resultados
+  print(f"Suma: {suma}")
+  print(f"Resta: {resta}")
+  print(f"Producto: {producto}")
+  print(f"Division: {division}")
+  print(f"Potencia: {potencia}")
+
+solution_code: |
+  # Realiza las operaciones:
+
+  # 1. Suma de 15 + 27
+  suma = 15 + 27
+
+  # 2. Resta de 100 - 37
+  resta = 100 - 37
+
+  # 3. Multiplicacion de 8 * 7
+  producto = 8 * 7
+
+  # 4. Division de 45 / 5
+  division = 45 / 5
+
+  # 5. Potencia: 2 elevado a la 8
+  potencia = 2 ** 8
+
+  # Imprime los resultados
+  print(f"Suma: {suma}")
+  print(f"Resta: {resta}")
+  print(f"Producto: {producto}")
+  print(f"Division: {division}")
+  print(f"Potencia: {potencia}")
+
+test_cases:
+  - id: test-suma
+    name: "Suma correcta"
+    test_code: |
+      assert suma == 42, f"15 + 27 = 42, obtuviste {suma}"
+    points: 5
+    error_message: "15 + 27 deberia ser 42"
+
+  - id: test-resta
+    name: "Resta correcta"
+    test_code: |
+      assert resta == 63, f"100 - 37 = 63, obtuviste {resta}"
+    points: 5
+    error_message: "100 - 37 deberia ser 63"
+
+  - id: test-producto
+    name: "Multiplicacion correcta"
+    test_code: |
+      assert producto == 56, f"8 * 7 = 56, obtuviste {producto}"
+    points: 5
+    error_message: "8 * 7 deberia ser 56"
+
+  - id: test-division
+    name: "Division correcta"
+    test_code: |
+      assert division == 9.0, f"45 / 5 = 9.0, obtuviste {division}"
+    points: 5
+    error_message: "45 / 5 deberia ser 9.0"
+
+  - id: test-potencia
+    name: "Potencia correcta"
+    test_code: |
+      assert potencia == 256, f"2 ** 8 = 256, obtuviste {potencia}"
+    points: 5
+    error_message: "2 ** 8 deberia ser 256"
+
+hints:
+  - "Suma: usa +"
+  - "Resta: usa -"
+  - "Multiplicacion: usa *"
+  - "Division: usa /"
+  - "Potencia: usa ** (dos asteriscos)"
+
+tags:
+  - operadores
+  - aritmetica

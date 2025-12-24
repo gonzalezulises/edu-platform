@@ -1,0 +1,65 @@
+id: ex-13-funcion-return
+type: code-python
+title: "Funcion con return"
+description: "Crea una funcion que devuelva un valor"
+instructions: |
+  Crea una funcion llamada 'calcular_cuadrado' que:
+  1. Reciba un numero como parametro
+  2. Calcule el cuadrado (numero * numero o numero ** 2)
+  3. Devuelva el resultado con return
+
+  Luego usa la funcion para calcular el cuadrado de 5 y guardalo en 'resultado'.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Define la funcion que devuelve el cuadrado:
+
+
+  # Usa la funcion y guarda el resultado:
+  resultado = calcular_cuadrado(5)
+
+  # Imprime el resultado
+  print(f"El cuadrado de 5 es: {resultado}")
+
+solution_code: |
+  # Define la funcion que devuelve el cuadrado:
+  def calcular_cuadrado(numero):
+      return numero ** 2
+
+  # Usa la funcion y guarda el resultado:
+  resultado = calcular_cuadrado(5)
+
+  # Imprime el resultado
+  print(f"El cuadrado de 5 es: {resultado}")
+
+test_cases:
+  - id: test-resultado
+    name: "Resultado correcto"
+    test_code: |
+      assert resultado == 25, f"5^2 = 25, obtuviste {resultado}"
+    points: 10
+
+  - id: test-funcion
+    name: "Funcion definida"
+    test_code: |
+      assert callable(calcular_cuadrado)
+    points: 5
+
+  - id: test-otros
+    name: "Funciona con otros numeros"
+    test_code: |
+      assert calcular_cuadrado(3) == 9
+      assert calcular_cuadrado(10) == 100
+    points: 5
+
+hints:
+  - "def calcular_cuadrado(numero):"
+  - "Dentro: return numero ** 2"
+  - "El return devuelve el valor a quien llamo la funcion"
+
+tags:
+  - funciones
+  - return

@@ -1,0 +1,51 @@
+id: ex-11-funcion-simple
+type: code-python
+title: "Tu primera funcion"
+description: "Crea una funcion simple sin parametros"
+instructions: |
+  Crea una funcion llamada 'saludar' que imprima:
+  "Hola! Bienvenido a Python"
+
+  Luego llama a la funcion para ejecutarla.
+difficulty: beginner
+estimated_time_minutes: 5
+points: 15
+runtime_tier: pyodide
+
+starter_code: |
+  # Define la funcion saludar:
+
+
+  # Llama a la funcion:
+
+
+solution_code: |
+  # Define la funcion saludar:
+  def saludar():
+      print("Hola! Bienvenido a Python")
+
+  # Llama a la funcion:
+  saludar()
+
+test_cases:
+  - id: test-funcion
+    name: "Funcion definida"
+    test_code: |
+      assert callable(saludar), "saludar debe ser una funcion"
+    points: 10
+
+  - id: test-ejecuta
+    name: "Funcion se puede llamar"
+    test_code: |
+      saludar()  # No debe dar error
+      assert True
+    points: 5
+
+hints:
+  - "Usa def para definir: def saludar():"
+  - "No olvides los dos puntos y la indentacion"
+  - "Para llamar: saludar()"
+
+tags:
+  - funciones
+  - def

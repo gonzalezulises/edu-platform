@@ -1,0 +1,64 @@
+id: ex-09-for-loop
+type: code-python
+title: "Bucle for"
+description: "Recorre una lista con un bucle for"
+instructions: |
+  Dada una lista de numeros, usa un bucle for para:
+  1. Calcular la suma de todos los numeros
+  2. Guardar el resultado en la variable 'total'
+
+  Hint: Inicializa total = 0 antes del bucle y suma cada numero.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Lista de numeros
+  numeros = [10, 20, 30, 40, 50]
+
+  # Inicializa la variable para la suma
+  total = 0
+
+  # Usa un bucle for para sumar todos los numeros:
+
+
+  # Imprime el resultado
+  print(f"La suma es: {total}")
+
+solution_code: |
+  # Lista de numeros
+  numeros = [10, 20, 30, 40, 50]
+
+  # Inicializa la variable para la suma
+  total = 0
+
+  # Usa un bucle for para sumar todos los numeros:
+  for numero in numeros:
+      total = total + numero
+
+  # Imprime el resultado
+  print(f"La suma es: {total}")
+
+test_cases:
+  - id: test-suma
+    name: "Suma correcta"
+    test_code: |
+      assert total == 150, f"La suma deberia ser 150, obtuviste {total}"
+    points: 15
+
+  - id: test-variable
+    name: "Variable total existe"
+    test_code: |
+      assert 'total' in dir()
+    points: 5
+
+hints:
+  - "Estructura: for numero in numeros:"
+  - "Dentro del bucle: total = total + numero"
+  - "Tambien puedes usar: total += numero"
+
+tags:
+  - for
+  - bucles
+  - listas

@@ -1,0 +1,58 @@
+id: ex-10-while-loop
+type: code-python
+title: "Bucle while"
+description: "Usa while para repetir hasta cumplir una condicion"
+instructions: |
+  Escribe un programa que cuente del 1 al 5 usando un bucle while.
+  1. Inicializa contador = 1
+  2. Mientras contador sea menor o igual a 5:
+     - Imprime el contador
+     - Incrementa el contador en 1
+difficulty: beginner
+estimated_time_minutes: 5
+points: 15
+runtime_tier: pyodide
+
+starter_code: |
+  # Inicializa el contador
+  contador = 1
+
+  # Escribe el bucle while:
+  # Mientras contador <= 5, imprime y aumenta
+
+
+
+  print("Fin del conteo!")
+
+solution_code: |
+  # Inicializa el contador
+  contador = 1
+
+  # Escribe el bucle while:
+  while contador <= 5:
+      print(contador)
+      contador += 1
+
+  print("Fin del conteo!")
+
+test_cases:
+  - id: test-contador
+    name: "Contador llega a 6"
+    test_code: |
+      assert contador == 6, f"Despues del bucle, contador deberia ser 6, es {contador}"
+    points: 10
+
+  - id: test-no-infinito
+    name: "Bucle termina correctamente"
+    test_code: |
+      assert contador > 5, "El bucle debe incrementar el contador"
+    points: 5
+
+hints:
+  - "Estructura: while contador <= 5:"
+  - "Dentro: print(contador) y contador += 1"
+  - "Importante: incrementar el contador para evitar bucle infinito"
+
+tags:
+  - while
+  - bucles

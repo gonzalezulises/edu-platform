@@ -1,0 +1,87 @@
+# Modulo 01: Fundamentos de Python
+
+id: module-01
+title: "Fundamentos de Python"
+description: "Aprende las bases del lenguaje Python con ejercicios practicos: variables, operadores, control de flujo, listas y funciones"
+order: 1
+
+lessons:
+  - id: lesson-01
+    file: lessons/01-variables.md
+    title: "Variables y Tipos de Datos"
+    type: text
+    order: 1
+
+  - id: lesson-02
+    file: lessons/02-operadores.md
+    title: "Operadores y Expresiones"
+    type: text
+    order: 2
+
+  - id: lesson-03
+    file: lessons/03-control-flujo.md
+    title: "Estructuras de Control"
+    type: text
+    order: 3
+
+  - id: lesson-04
+    file: lessons/04-listas.md
+    title: "Listas y Bucles"
+    type: text
+    order: 4
+
+  - id: lesson-05
+    file: lessons/05-funciones.md
+    title: "Funciones"
+    type: text
+    order: 5
+
+exercises:
+  # Leccion 1: Variables
+  - id: ex-01-hola-mundo
+    file: exercises/ex-01-hola-mundo.yaml
+    lesson_id: lesson-01
+  - id: ex-02-variables-basicas
+    file: exercises/ex-02-variables-basicas.yaml
+    lesson_id: lesson-01
+  - id: ex-03-tipos-datos
+    file: exercises/ex-03-tipos-datos.yaml
+    lesson_id: lesson-01
+
+  # Leccion 2: Operadores
+  - id: ex-04-aritmetica
+    file: exercises/ex-04-aritmetica.yaml
+    lesson_id: lesson-02
+  - id: ex-05-comparaciones
+    file: exercises/ex-05-comparaciones.yaml
+    lesson_id: lesson-02
+
+  # Leccion 3: Control de flujo
+  - id: ex-06-if-else
+    file: exercises/ex-06-if-else.yaml
+    lesson_id: lesson-03
+  - id: ex-07-elif
+    file: exercises/ex-07-elif.yaml
+    lesson_id: lesson-03
+
+  # Leccion 4: Listas
+  - id: ex-08-crear-lista
+    file: exercises/ex-08-crear-lista.yaml
+    lesson_id: lesson-04
+  - id: ex-09-for-loop
+    file: exercises/ex-09-for-loop.yaml
+    lesson_id: lesson-04
+  - id: ex-10-while-loop
+    file: exercises/ex-10-while-loop.yaml
+    lesson_id: lesson-04
+
+  # Leccion 5: Funciones
+  - id: ex-11-funcion-simple
+    file: exercises/ex-11-funcion-simple.yaml
+    lesson_id: lesson-05
+  - id: ex-12-funcion-parametros
+    file: exercises/ex-12-funcion-parametros.yaml
+    lesson_id: lesson-05
+  - id: ex-13-funcion-return
+    file: exercises/ex-13-funcion-return.yaml
+    lesson_id: lesson-05

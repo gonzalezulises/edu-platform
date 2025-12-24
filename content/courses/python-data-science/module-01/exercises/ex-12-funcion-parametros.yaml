@@ -1,0 +1,53 @@
+id: ex-12-funcion-parametros
+type: code-python
+title: "Funcion con parametros"
+description: "Crea una funcion que reciba parametros"
+instructions: |
+  Crea una funcion llamada 'saludar_persona' que reciba un parametro 'nombre'
+  e imprima: "Hola, {nombre}!"
+
+  Luego llama a la funcion con tu nombre.
+difficulty: beginner
+estimated_time_minutes: 5
+points: 15
+runtime_tier: pyodide
+
+starter_code: |
+  # Define la funcion con un parametro:
+
+
+  # Llama a la funcion con diferentes nombres:
+  saludar_persona("Maria")
+  saludar_persona("Carlos")
+
+solution_code: |
+  # Define la funcion con un parametro:
+  def saludar_persona(nombre):
+      print(f"Hola, {nombre}!")
+
+  # Llama a la funcion con diferentes nombres:
+  saludar_persona("Maria")
+  saludar_persona("Carlos")
+
+test_cases:
+  - id: test-funcion
+    name: "Funcion definida con parametro"
+    test_code: |
+      assert callable(saludar_persona), "saludar_persona debe ser una funcion"
+    points: 8
+
+  - id: test-parametro
+    name: "Acepta un parametro"
+    test_code: |
+      saludar_persona("Test")  # No debe dar error
+      assert True
+    points: 7
+
+hints:
+  - "def saludar_persona(nombre):"
+  - "Dentro usa: print(f'Hola, {nombre}!')"
+  - "Recuerda la f antes de las comillas para f-strings"
+
+tags:
+  - funciones
+  - parametros

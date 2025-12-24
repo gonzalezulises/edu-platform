@@ -1,0 +1,29 @@
+# Introduccion a Python - Curso Practico
+
+id: python-data-science
+title: "Introduccion a Python"
+description: "Aprende Python desde cero con ejercicios practicos interactivos. Ideal para principiantes que quieren dar sus primeros pasos en programacion."
+slug: python-data-science
+
+instructor_id: null
+is_published: true
+
+exercise_config:
+  default_runtime: pyodide
+  allow_hints: true
+  show_solution_after_attempts: 3
+  max_attempts: null
+
+modules:
+  - id: module-01
+    title: "Fundamentos de Python"
+    description: "Variables, operadores, estructuras de control, listas y funciones"
+    order: 1
+
+prerequisites: []
+
+tags:
+  - python
+  - programacion
+  - principiantes
+  - interactivo

@@ -1,3 +1,6 @@
+// Re-export exercise types
+export * from './exercises'
+
 export type UserRole = 'student' | 'instructor' | 'admin'
 
 export type LessonType = 'video' | 'text' | 'quiz' | 'assignment'
