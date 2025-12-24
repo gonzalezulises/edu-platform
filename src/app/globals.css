@@ -25,17 +25,99 @@
   content: none !important;
 }
 
-/* Ensure hljs styles take precedence */
+/* Terminal-style code blocks */
 .hljs {
-  background: #0d1117 !important;
+  background: linear-gradient(180deg, #1e1e1e 0%, #0d1117 100%) !important;
   padding: 1rem !important;
-  border-radius: 0.5rem !important;
+  padding-top: 2.5rem !important;
+  border-radius: 0.75rem !important;
   overflow-x: auto !important;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  border: 1px solid #30363d !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+  position: relative !important;
+}
+
+/* Terminal window dots */
+.hljs::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  width: 12px;
+  height: 12px;
+  background: #ff5f56;
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+}
+
+/* Terminal title bar */
+.hljs::after {
+  content: 'Terminal';
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #6e7681;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Language-specific terminal titles */
+pre:has(> code.language-bash) .hljs::after,
+pre:has(> code.language-sh) .hljs::after,
+code.language-bash::after,
+code.language-sh::after {
+  content: 'Terminal' !important;
+}
+
+code.language-javascript::after,
+code.language-js::after {
+  content: 'JavaScript' !important;
+}
+
+code.language-typescript::after,
+code.language-ts::after,
+code.language-tsx::after {
+  content: 'TypeScript' !important;
+}
+
+code.language-json::after {
+  content: 'JSON' !important;
+}
+
+code.language-css::after {
+  content: 'CSS' !important;
+}
+
+code.language-html::after {
+  content: 'HTML' !important;
+}
+
+code.language-sql::after {
+  content: 'SQL' !important;
 }
 
 pre:has(> code.hljs) {
   background: transparent !important;
   padding: 0 !important;
+}
+
+/* Inline code styling */
+.prose :not(pre) > code {
+  background: #f3f4f6 !important;
+  color: #1f2937 !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875em !important;
+  font-weight: 500 !important;
+}
+
+.dark .prose :not(pre) > code {
+  background: #374151 !important;
+  color: #f3f4f6 !important;
 }
 
 :root {
