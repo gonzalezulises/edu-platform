@@ -122,6 +122,176 @@ edu-platform/
 | `src/hooks/usePyodide.ts` | Hook para cargar y ejecutar Python |
 | `src/app/api/exercises/[exerciseId]/route.ts` | API que sirve ejercicios |
 
+### Implementacion Tecnica del Sistema Interactivo
+
+#### Pyodide (Python en el Navegador)
+
+**Que es:** Pyodide es CPython compilado a WebAssembly. Permite ejecutar Python real en el navegador sin servidor.
+
+**Como funciona en este proyecto:**
+
+```typescript
+// src/hooks/usePyodide.ts
+
+// 1. Carga Pyodide desde CDN (~8MB primera vez, luego cacheado)
+const pyodide = await loadPyodide({
+  indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+})
+
+// 2. Instala paquetes con micropip (equivalente a pip)
+await pyodide.loadPackage("micropip")
+const micropip = pyodide.pyimport("micropip")
+await micropip.install(["pandas", "numpy"])
+
+// 3. Ejecuta codigo del usuario
+const result = await pyodide.runPythonAsync(userCode)
+
+// 4. Captura stdout/stderr
+pyodide.setStdout({ batched: (text) => setOutput(text) })
+```
+
+**Paquetes disponibles:** numpy, pandas, matplotlib, scipy, scikit-learn (se cargan bajo demanda)
+
+#### Monaco Editor
+
+**Que es:** El mismo editor de VS Code, embebido en React.
+
+**Configuracion usada:**
+
+```tsx
+// src/components/exercises/CodePlayground.tsx
+
+import Editor from '@monaco-editor/react'
+
+<Editor
+  height="300px"
+  language="python"           // Syntax highlighting
+  theme="vs-dark"             // Tema oscuro
+  value={code}
+  onChange={setCode}
+  options={{
+    minimap: { enabled: false },
+    fontSize: 14,
+    lineNumbers: 'on',
+    automaticLayout: true,
+    tabSize: 4,
+  }}
+/>
+```
+
+#### Ejecucion de Tests
+
+Los tests se definen en YAML y se ejecutan en el contexto del codigo del usuario:
+
+```yaml
+# exercises/ex-01.yaml
+test_cases:
+  - id: test-output
+    name: "Verifica output"
+    test_code: |
+      import sys
+      from io import StringIO
+
+      # Capturar stdout
+      old_stdout = sys.stdout
+      sys.stdout = StringIO()
+
+      # El codigo del usuario ya se ejecuto, verificar resultado
+      assert 'resultado' in dir(), "Variable 'resultado' no definida"
+      assert resultado == 42, f"Esperado 42, obtenido {resultado}"
+
+      sys.stdout = old_stdout
+    points: 10
+```
+
+**Flujo de ejecucion:**
+1. Usuario escribe codigo en Monaco
+2. Click en "Ejecutar" → codigo se envia a Pyodide
+3. Pyodide ejecuta codigo del usuario
+4. Luego ejecuta cada test_code en el mismo contexto
+5. Si test pasa → puntos sumados
+6. Resultados se muestran en UI
+
+#### SQL Playground (sql.js)
+
+**Que es:** SQLite compilado a WebAssembly.
+
+```typescript
+// src/hooks/useSQLite.ts
+
+import initSqlJs from 'sql.js'
+
+// 1. Inicializar sql.js
+const SQL = await initSqlJs({
+  locateFile: file => `https://sql.js.org/dist/${file}`
+})
+
+// 2. Crear base de datos en memoria
+const db = new SQL.Database()
+
+// 3. Cargar schema y datos
+db.run(schemaSQL)
+db.run(insertDataSQL)
+
+// 4. Ejecutar query del usuario
+const results = db.exec(userQuery)
+```
+
+#### Dependencias del Sistema
+
+```json
+// package.json (relevantes para ejercicios)
+{
+  "dependencies": {
+    "@monaco-editor/react": "^4.6.0",  // Editor de codigo
+    "pyodide": "^0.24.1",              // Python WASM
+    "sql.js": "^1.9.0",                // SQLite WASM
+    "js-yaml": "^4.1.0",               // Parser de YAML
+    "react-markdown": "^9.0.1",        // Render markdown
+    "remark-gfm": "^4.0.0"             // GitHub Flavored Markdown
+  }
+}
+```
+
+#### Diagrama de Componentes
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        LessonPlayer                          │
+│  (src/components/course/LessonPlayer.tsx)                   │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                     MarkdownRenderer                         │
+│  - Parsea markdown                                          │
+│  - Detecta <!-- exercise:id -->                             │
+│  - Renderiza Exercise component                             │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                        Exercise                              │
+│  - Fetch /api/exercises/[id]                                │
+│  - Decide que playground renderizar                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+┌───────────────────┐ ┌──────────────┐ ┌──────────────┐
+│  CodePlayground   │ │ SQLPlayground│ │ ColabLauncher│
+│  - Monaco Editor  │ │ - Monaco     │ │ - Link Colab │
+│  - usePyodide()   │ │ - useSQLite()│ │              │
+│  - Test runner    │ │ - Tabla res  │ │              │
+└───────────────────┘ └──────────────┘ └──────────────┘
+         │                    │
+         ▼                    ▼
+┌───────────────────┐ ┌──────────────┐
+│     Pyodide       │ │    sql.js    │
+│  (WebAssembly)    │ │ (WebAssembly)│
+└───────────────────┘ └──────────────┘
+```
+
 ---
 
 ## Paso a Paso: Crear un Nuevo Curso
