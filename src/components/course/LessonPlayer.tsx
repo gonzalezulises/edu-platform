@@ -11,6 +11,7 @@ interface LessonPlayerProps {
   lesson: LessonFull
   userId?: string
   courseId?: string
+  courseSlug?: string
   isCompleted?: boolean
   onComplete?: () => void
   quiz?: Quiz | null
@@ -20,6 +21,7 @@ export default function LessonPlayer({
   lesson,
   userId,
   courseId,
+  courseSlug = 'python-data-science',
   isCompleted = false,
   onComplete,
   quiz
@@ -119,9 +121,17 @@ export default function LessonPlayer({
         return (
           <div className="mb-6">
             {lesson.parsedContent ? (
-              <MarkdownRenderer content={lesson.parsedContent} />
+              <MarkdownRenderer
+                content={lesson.parsedContent}
+                courseSlug={courseSlug}
+                moduleId="module-01"
+              />
             ) : lesson.content ? (
-              <MarkdownRenderer content={lesson.content} />
+              <MarkdownRenderer
+                content={lesson.content}
+                courseSlug={courseSlug}
+                moduleId="module-01"
+              />
             ) : (
               <p className="text-gray-500">Sin contenido disponible.</p>
             )}
@@ -210,7 +220,11 @@ export default function LessonPlayer({
       {lesson.lesson_type === 'video' && (lesson.parsedContent || lesson.content) && (
         <div className="mb-6">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Notas de la leccion</h3>
-          <MarkdownRenderer content={lesson.parsedContent || lesson.content || ''} />
+          <MarkdownRenderer
+            content={lesson.parsedContent || lesson.content || ''}
+            courseSlug={courseSlug}
+            moduleId="module-01"
+          />
         </div>
       )}
 
