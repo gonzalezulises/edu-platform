@@ -457,57 +457,44 @@ ON CONFLICT (id) DO UPDATE SET
 
 **NOTA:** Usa `$CONTENT$...$CONTENT$` para contenido multilinea con caracteres especiales.
 
-### Opcion B: Script Node.js
-
-```javascript
-// scripts/seed-[curso].mjs
-
-import { createClient } from '@supabase/supabase-js'
-import { config } from 'dotenv'
-
-config({ path: '.env.local' })
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-)
-
-async function seed() {
-  // Insertar curso
-  const { data: course } = await supabase
-    .from('courses')
-    .upsert({
-      title: 'Titulo',
-      description: 'Descripcion',
-      is_published: true
-    })
-    .select()
-    .single()
-
-  // Insertar modulo
-  const { data: module } = await supabase
-    .from('modules')
-    .upsert({
-      course_id: course.id,
-      title: 'Modulo 1',
-      order_index: 1
-    })
-    .select()
-    .single()
-
-  // Insertar lecciones
-  // ...
-}
-
-seed()
-```
-
 ### Aplicar Migracion
 
+**Paso 1: Verificar que el proyecto esta linkeado**
+
 ```bash
-# Cargar variables de entorno y aplicar
+cd /Users/ulisesgonzalez/Documents/data_science_projects/edu-platform
+
+# Verificar estado del link
+cat supabase/.temp/project-ref
+# Debe mostrar: mcssewqlcyfsuznuvtmh
+```
+
+Si no esta linkeado:
+```bash
+source .env.local && supabase link --project-ref mcssewqlcyfsuznuvtmh
+```
+
+**Paso 2: Aplicar migraciones**
+
+```bash
 source .env.local && supabase db push --linked
 ```
+
+**Paso 3: Verificar migraciones aplicadas**
+
+```bash
+source .env.local && supabase migration list
+```
+
+### Verificar en Supabase Dashboard
+
+Despues de aplicar, verifica los datos en:
+- https://supabase.com/dashboard/project/mcssewqlcyfsuznuvtmh/editor
+
+Tablas a verificar:
+- `courses` - nuevo curso insertado
+- `modules` - modulos del curso
+- `lessons` - lecciones con contenido markdown
 
 ---
 
@@ -573,24 +560,33 @@ sys.stdout = old_stdout
 ### RLS bloquea inserts
 
 Si la migracion SQL falla por RLS:
-1. Las migraciones via `supabase db push` se ejecutan con permisos elevados
-2. Si usas script JS, necesitas `SUPABASE_SERVICE_ROLE_KEY` (no la anon key)
+1. Las migraciones via `supabase db push` se ejecutan con permisos elevados (bypass RLS)
+2. Siempre usa migraciones SQL, no scripts JS con el cliente
+3. Si necesitas insertar desde la app, verifica las policies en Supabase Dashboard
 
 ---
 
 ## Checklist para Nuevo Curso
 
+### Contenido
 - [ ] Crear carpetas: `content/courses/[slug]/module-01/{lessons,exercises}`
 - [ ] Crear `course.yaml` con metadata
 - [ ] Crear `module.yaml` con lista de lecciones y ejercicios
 - [ ] Crear archivos `.md` para cada leccion
 - [ ] Crear archivos `.yaml` para cada ejercicio
 - [ ] Insertar `<!-- exercise:id -->` en las lecciones
-- [ ] Crear migracion SQL en `supabase/migrations/`
-- [ ] Aplicar migracion: `source .env.local && supabase db push --linked`
+
+### Base de Datos (Supabase)
+- [ ] Verificar link: `cat supabase/.temp/project-ref` (debe mostrar `mcssewqlcyfsuznuvtmh`)
+- [ ] Si no esta linkeado: `source .env.local && supabase link --project-ref mcssewqlcyfsuznuvtmh`
+- [ ] Crear migracion SQL en `supabase/migrations/YYYYMMDDHHMMSS_seed_[curso].sql`
+- [ ] Aplicar: `source .env.local && supabase db push --linked`
+- [ ] Verificar: `source .env.local && supabase migration list`
+
+### Deploy
 - [ ] Verificar build: `npm run build`
-- [ ] Commit y push
-- [ ] Verificar en produccion
+- [ ] Commit y push a main
+- [ ] Verificar deploy en Vercel
 
 ---
 
