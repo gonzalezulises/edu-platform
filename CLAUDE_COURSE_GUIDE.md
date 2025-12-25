@@ -8,6 +8,19 @@ Este documento contiene toda la informacion necesaria para crear un nuevo curso 
 
 ## Como Iniciar una Nueva Sesion de Claude Code
 
+### Repositorio GitHub
+
+```
+https://github.com/gonzalezulises/edu-platform.git
+```
+
+Si no tienes el proyecto clonado:
+```bash
+git clone https://github.com/gonzalezulises/edu-platform.git
+cd edu-platform
+npm install
+```
+
 ### Opcion A: Iniciar desde el proyecto (Recomendado)
 
 ```bash
