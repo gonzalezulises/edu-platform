@@ -1,0 +1,40 @@
+id: ex-11-limit
+type: sql
+title: "Primeros 5 productos"
+description: "Usa LIMIT para restringir resultados"
+difficulty: beginner
+estimated_time_minutes: 3
+points: 10
+runtime_tier: pyodide
+
+instructions: |
+  A veces solo necesitas una muestra de datos para verificar que tu consulta funciona.
+
+  **Tu tarea**: Muestra solo los **primeros 5 productos** (todas las columnas).
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Muestra solo 5 productos
+  SELECT * FROM productos
+
+
+solution_code: |
+  SELECT * FROM productos LIMIT 5
+
+test_cases:
+  - id: test-limit-count
+    name: "Exactamente 5 filas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 5, f"Debes retornar exactamente 5 filas, retornaste {len(result.rows)}"
+    points: 10
+
+hints:
+  - "LIMIT va al final de la consulta"
+  - "LIMIT 5 retorna maximo 5 filas"
+  - "Solucion: SELECT * FROM productos LIMIT 5"
+
+tags:
+  - sql
+  - limit

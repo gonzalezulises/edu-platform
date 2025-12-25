@@ -1,0 +1,50 @@
+id: ex-07-where-numerico
+type: sql
+title: "Filtro numerico"
+description: "Usa WHERE con comparacion numerica"
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+instructions: |
+  Quieres ver que productos tienen buen inventario.
+
+  **Tu tarea**: Muestra el **nombre** y **stock** de productos con stock **mayor a 100**.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Productos con stock > 100
+  SELECT nombre, stock
+  FROM productos
+  WHERE
+
+solution_code: |
+  SELECT nombre, stock FROM productos WHERE stock > 100
+
+test_cases:
+  - id: test-filter-correct
+    name: "Solo stock > 100"
+    test_code: |
+      result = execute_query(user_code)
+      for row in result.rows:
+          assert row['stock'] > 100, f"Encontre stock de {row['stock']}, que no es > 100"
+    points: 10
+
+  - id: test-row-count
+    name: "4 productos con alto stock"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 4, f"4 productos tienen stock > 100. Tu consulta retorna {len(result.rows)}"
+    points: 10
+
+hints:
+  - "Para comparar numeros usa > sin comillas: stock > 100"
+  - "No pongas comillas en 100, es un numero"
+  - "Solucion: SELECT nombre, stock FROM productos WHERE stock > 100"
+
+tags:
+  - sql
+  - where
+  - numerico

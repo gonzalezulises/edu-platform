@@ -1,0 +1,93 @@
+id: module-01
+title: "Fundamentos de SQL para Analistas de Negocio"
+description: |
+  Aprende a consultar bases de datos desde cero. Sin prerrequisitos de programacion.
+  Al terminar, podras extraer y resumir datos de cualquier base de datos relacional.
+order: 1
+
+learningOutcomes:
+  - "Escribir consultas SELECT para extraer datos de una tabla"
+  - "Filtrar datos con condiciones WHERE simples y compuestas"
+  - "Ordenar y limitar resultados"
+  - "Calcular agregaciones basicas (COUNT, SUM, AVG)"
+  - "Agrupar datos con GROUP BY"
+
+lessons:
+  - id: lesson-01
+    file: lessons/01-que-es-sql.md
+    title: "Que es SQL y por que lo necesitas?"
+    type: text
+    order: 1
+    duration_minutes: 40
+  - id: lesson-02
+    file: lessons/02-select-where.md
+    title: "Extrayendo datos: SELECT y WHERE"
+    type: text
+    order: 2
+    duration_minutes: 50
+  - id: lesson-03
+    file: lessons/03-ordenar-limitar.md
+    title: "Ordenando y limitando resultados"
+    type: text
+    order: 3
+    duration_minutes: 40
+  - id: lesson-04
+    file: lessons/04-agregaciones.md
+    title: "Agregaciones y GROUP BY"
+    type: text
+    order: 4
+    duration_minutes: 50
+
+exercises:
+  # Leccion 1
+  - id: ex-01-select-todo
+    file: exercises/ex-01-select-todo.yaml
+    lesson_id: lesson-01
+  - id: ex-02-select-tabla
+    file: exercises/ex-02-select-tabla.yaml
+    lesson_id: lesson-01
+  - id: ex-03-select-ventas
+    file: exercises/ex-03-select-ventas.yaml
+    lesson_id: lesson-01
+  # Leccion 2
+  - id: ex-04-columnas-especificas
+    file: exercises/ex-04-columnas-especificas.yaml
+    lesson_id: lesson-02
+  - id: ex-05-columnas-ventas
+    file: exercises/ex-05-columnas-ventas.yaml
+    lesson_id: lesson-02
+  - id: ex-06-where-basico
+    file: exercises/ex-06-where-basico.yaml
+    lesson_id: lesson-02
+  - id: ex-07-where-numerico
+    file: exercises/ex-07-where-numerico.yaml
+    lesson_id: lesson-02
+  - id: ex-08-where-compuesto
+    file: exercises/ex-08-where-compuesto.yaml
+    lesson_id: lesson-02
+  # Leccion 3
+  - id: ex-09-order-asc
+    file: exercises/ex-09-order-asc.yaml
+    lesson_id: lesson-03
+  - id: ex-10-order-desc
+    file: exercises/ex-10-order-desc.yaml
+    lesson_id: lesson-03
+  - id: ex-11-limit
+    file: exercises/ex-11-limit.yaml
+    lesson_id: lesson-03
+  - id: ex-12-top-n
+    file: exercises/ex-12-top-n.yaml
+    lesson_id: lesson-03
+  # Leccion 4
+  - id: ex-13-count
+    file: exercises/ex-13-count.yaml
+    lesson_id: lesson-04
+  - id: ex-14-sum-avg
+    file: exercises/ex-14-sum-avg.yaml
+    lesson_id: lesson-04
+  - id: ex-15-group-by
+    file: exercises/ex-15-group-by.yaml
+    lesson_id: lesson-04
+  - id: ex-16-group-having
+    file: exercises/ex-16-group-having.yaml
+    lesson_id: lesson-04

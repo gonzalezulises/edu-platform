@@ -1,0 +1,50 @@
+id: ex-13-count
+type: sql
+title: "Contando registros"
+description: "Usa COUNT para contar filas"
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+instructions: |
+  El gerente necesita numeros rapidos para una reunion.
+
+  **Tu tarea**: Escribe una consulta que muestre el total de productos (llamalo `total_productos`).
+
+  > Tip: Puedes contar de tablas diferentes en consultas separadas.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Cuantos productos hay?
+  SELECT COUNT(*) AS total_productos
+  FROM
+
+solution_code: |
+  SELECT COUNT(*) AS total_productos FROM productos
+
+test_cases:
+  - id: test-count-value
+    name: "Cuenta correcta"
+    test_code: |
+      result = execute_query(user_code)
+      assert result.rows[0]['total_productos'] == 8, f"Hay 8 productos, obtuviste {result.rows[0]['total_productos']}"
+    points: 15
+
+  - id: test-alias
+    name: "Usa alias"
+    test_code: |
+      result = execute_query(user_code)
+      assert 'total_productos' in [c.lower() for c in result.columns], "Usa AS total_productos para nombrar la columna"
+    points: 5
+
+hints:
+  - "COUNT(*) cuenta todas las filas"
+  - "AS nombra la columna resultante"
+  - "Solucion: SELECT COUNT(*) AS total_productos FROM productos"
+
+tags:
+  - sql
+  - count
+  - agregacion

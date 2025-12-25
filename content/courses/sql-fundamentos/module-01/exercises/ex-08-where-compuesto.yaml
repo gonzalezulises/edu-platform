@@ -1,0 +1,54 @@
+id: ex-08-where-compuesto
+type: sql
+title: "Condiciones compuestas"
+description: "Combina condiciones con AND"
+difficulty: intermediate
+estimated_time_minutes: 6
+points: 25
+runtime_tier: pyodide
+
+instructions: |
+  Tu jefe quiere perifericos baratos para una promocion.
+
+  **Tu tarea**: Muestra el **nombre** y **precio** de productos que:
+  1. Sean de categoria **'Perifericos'**
+  2. Tengan precio **menor a $100**
+
+  > Tip: Combina condiciones con AND
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Perifericos baratos (< $100)
+  SELECT nombre, precio
+  FROM productos
+  WHERE
+
+solution_code: |
+  SELECT nombre, precio FROM productos WHERE categoria = 'Perifericos' AND precio < 100
+
+test_cases:
+  - id: test-both-conditions
+    name: "Cumple ambas condiciones"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 2, f"Hay 2 perifericos < $100. Tu consulta retorna {len(result.rows)}"
+    points: 15
+
+  - id: test-correct-values
+    name: "Valores correctos"
+    test_code: |
+      result = execute_query(user_code)
+      nombres = [row['nombre'] for row in result.rows]
+      assert 'Teclado Mecanico' in nombres or 'Mouse Ergonomico' in nombres, "Verifica que filtres correctamente"
+    points: 10
+
+hints:
+  - "Usa AND para requerir ambas condiciones"
+  - "categoria = 'Perifericos' AND precio < 100"
+  - "Solucion: SELECT nombre, precio FROM productos WHERE categoria = 'Perifericos' AND precio < 100"
+
+tags:
+  - sql
+  - where
+  - and

@@ -1,0 +1,49 @@
+id: ex-09-order-asc
+type: sql
+title: "Ordenar por stock"
+description: "Ordena productos por stock ascendente"
+difficulty: beginner
+estimated_time_minutes: 4
+points: 15
+runtime_tier: pyodide
+
+instructions: |
+  Quieres identificar productos con bajo inventario para reordenar.
+
+  **Tu tarea**: Muestra **todos los datos** de productos ordenados por **stock** de menor a mayor.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Productos ordenados por stock (menor a mayor)
+  SELECT * FROM productos
+  ORDER BY
+
+solution_code: |
+  SELECT * FROM productos ORDER BY stock ASC
+
+test_cases:
+  - id: test-first-row
+    name: "Menor stock primero"
+    test_code: |
+      result = execute_query(user_code)
+      assert result.rows[0]['stock'] == 45, f"El primer producto debe ser Laptop Pro 15 con stock 45, obtuviste stock {result.rows[0]['stock']}"
+    points: 10
+
+  - id: test-ordered
+    name: "Orden ascendente correcto"
+    test_code: |
+      result = execute_query(user_code)
+      stocks = [row['stock'] for row in result.rows]
+      assert stocks == sorted(stocks), "El orden debe ser ascendente (menor a mayor)"
+    points: 5
+
+hints:
+  - "ORDER BY columna ordena ascendente por defecto"
+  - "La columna es 'stock'"
+  - "Solucion: SELECT * FROM productos ORDER BY stock ASC (o solo ORDER BY stock)"
+
+tags:
+  - sql
+  - order-by
+  - asc

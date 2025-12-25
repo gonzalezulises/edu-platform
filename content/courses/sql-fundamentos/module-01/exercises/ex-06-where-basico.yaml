@@ -1,0 +1,51 @@
+id: ex-06-where-basico
+type: sql
+title: "Filtro de categoria"
+description: "Usa WHERE para filtrar por texto"
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+instructions: |
+  Tu jefe quiere ver solo los perifericos disponibles.
+
+  **Tu tarea**: Muestra **todos los datos** de productos cuya categoria sea **'Perifericos'**.
+
+  > Recuerda: El texto va entre comillas simples
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Filtra productos de categoria Perifericos
+  SELECT * FROM productos
+  WHERE
+
+solution_code: |
+  SELECT * FROM productos WHERE categoria = 'Perifericos'
+
+test_cases:
+  - id: test-row-count
+    name: "3 productos perifericos"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 3, f"Hay 3 perifericos. Tu consulta retorna {len(result.rows)}"
+    points: 10
+
+  - id: test-correct-category
+    name: "Solo categoria Perifericos"
+    test_code: |
+      result = execute_query(user_code)
+      for row in result.rows:
+          assert row['categoria'] == 'Perifericos', f"Encontre un producto con categoria '{row['categoria']}'"
+    points: 10
+
+hints:
+  - "Despues de WHERE va la condicion: columna = 'valor'"
+  - "La columna es 'categoria', el valor es 'Perifericos'"
+  - "Solucion: SELECT * FROM productos WHERE categoria = 'Perifericos'"
+
+tags:
+  - sql
+  - where
+  - texto

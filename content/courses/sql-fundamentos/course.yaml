@@ -1,0 +1,32 @@
+id: sql-fundamentos
+title: "Fundamentos de SQL para Analistas de Negocio"
+description: |
+  Aprende a consultar bases de datos desde cero. Sin prerrequisitos de programacion.
+  Al terminar, podras extraer y resumir datos de cualquier base de datos relacional.
+slug: sql-fundamentos
+thumbnail_url: null
+is_published: true
+instructor_id: null
+
+targetAudience: "Analistas de negocio sin experiencia en programacion"
+
+exercise_config:
+  default_runtime: sql
+  allow_solution_view: true
+  max_attempts: null
+
+modules:
+  - id: module-01
+    title: "Fundamentos de SQL"
+    description: "SELECT, WHERE, ORDER BY, LIMIT, agregaciones y GROUP BY"
+    order: 1
+
+prerequisites:
+  - "Familiaridad con Excel o Google Sheets"
+  - "Conceptos basicos de datos tabulares (filas, columnas)"
+
+tags:
+  - sql
+  - bases-de-datos
+  - principiantes
+  - analisis-datos

@@ -1,0 +1,65 @@
+id: ex-15-group-by
+type: sql
+title: "Ventas por vendedor"
+description: "Agrupa ventas con GROUP BY"
+difficulty: intermediate
+estimated_time_minutes: 7
+points: 25
+runtime_tier: pyodide
+
+instructions: |
+  El gerente de ventas quiere un reporte por persona.
+
+  **Tu tarea**: Muestra el **total vendido por cada vendedor**, ordenado de mayor a menor.
+
+  Columnas requeridas:
+  - `vendedor_id`
+  - `total_vendido` (suma de monto)
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Total por vendedor, ordenado
+  SELECT
+      vendedor_id,
+      SUM(monto) AS total_vendido
+  FROM ventas
+  GROUP BY
+  ORDER BY
+
+solution_code: |
+  SELECT vendedor_id, SUM(monto) AS total_vendido FROM ventas GROUP BY vendedor_id ORDER BY total_vendido DESC
+
+test_cases:
+  - id: test-group-count
+    name: "4 vendedores"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 4, f"Hay 4 vendedores con ventas, obtuviste {len(result.rows)} filas"
+    points: 10
+
+  - id: test-order
+    name: "Ordenado de mayor a menor"
+    test_code: |
+      result = execute_query(user_code)
+      totales = [row['total_vendido'] for row in result.rows]
+      assert totales == sorted(totales, reverse=True), "Debe estar ordenado de mayor a menor"
+    points: 10
+
+  - id: test-top-seller
+    name: "Mejor vendedor correcto"
+    test_code: |
+      result = execute_query(user_code)
+      assert result.rows[0]['vendedor_id'] == 2, f"El vendedor con mas ventas es el 2, obtuviste {result.rows[0]['vendedor_id']}"
+    points: 5
+
+hints:
+  - "GROUP BY vendedor_id agrupa las ventas por cada vendedor"
+  - "ORDER BY total_vendido DESC ordena de mayor a menor"
+  - "Solucion: SELECT vendedor_id, SUM(monto) AS total_vendido FROM ventas GROUP BY vendedor_id ORDER BY total_vendido DESC"
+
+tags:
+  - sql
+  - group-by
+  - sum
+  - order-by

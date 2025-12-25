@@ -1,0 +1,68 @@
+id: ex-16-group-having
+type: sql
+title: "Filtrar grupos con HAVING"
+description: "Usa HAVING para filtrar despues de agrupar"
+difficulty: intermediate
+estimated_time_minutes: 8
+points: 30
+runtime_tier: pyodide
+
+instructions: |
+  El programa de bonos aplica solo a vendedores que superaron $3,000 en ventas.
+
+  **Tu tarea**: Muestra solo los vendedores cuyo **total vendido sea mayor a $3,000**.
+
+  Columnas:
+  - `vendedor_id`
+  - `total_vendido`
+
+  Ordenado de mayor a menor.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Vendedores con mas de $3000 en ventas
+  SELECT
+      vendedor_id,
+      SUM(monto) AS total_vendido
+  FROM ventas
+  GROUP BY vendedor_id
+  HAVING
+  ORDER BY total_vendido DESC
+
+solution_code: |
+  SELECT vendedor_id, SUM(monto) AS total_vendido FROM ventas GROUP BY vendedor_id HAVING SUM(monto) > 3000 ORDER BY total_vendido DESC
+
+test_cases:
+  - id: test-filtered-count
+    name: "Solo 3 vendedores califican"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 3, f"Solo 3 vendedores tienen mas de $3000. Obtuviste {len(result.rows)}"
+    points: 15
+
+  - id: test-all-above-3000
+    name: "Todos > $3000"
+    test_code: |
+      result = execute_query(user_code)
+      for row in result.rows:
+          assert row['total_vendido'] > 3000, f"Vendedor {row['vendedor_id']} tiene ${row['total_vendido']}, no supera $3000"
+    points: 10
+
+  - id: test-order
+    name: "Ordenado correctamente"
+    test_code: |
+      result = execute_query(user_code)
+      totales = [row['total_vendido'] for row in result.rows]
+      assert totales == sorted(totales, reverse=True), "Debe estar ordenado de mayor a menor"
+    points: 5
+
+hints:
+  - "HAVING filtra grupos, no filas individuales"
+  - "HAVING SUM(monto) > 3000"
+  - "Solucion: ... HAVING SUM(monto) > 3000 ORDER BY total_vendido DESC"
+
+tags:
+  - sql
+  - group-by
+  - having

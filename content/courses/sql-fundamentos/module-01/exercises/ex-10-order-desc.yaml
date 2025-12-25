@@ -1,0 +1,50 @@
+id: ex-10-order-desc
+type: sql
+title: "Los mas caros primero"
+description: "Ordena por precio descendente"
+difficulty: beginner
+estimated_time_minutes: 4
+points: 15
+runtime_tier: pyodide
+
+instructions: |
+  Para el catalogo premium, quieres mostrar los productos mas caros primero.
+
+  **Tu tarea**: Muestra **nombre** y **precio** de productos, ordenados por **precio** de mayor a menor.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Productos por precio (mayor a menor)
+  SELECT nombre, precio
+  FROM productos
+  ORDER BY
+
+solution_code: |
+  SELECT nombre, precio FROM productos ORDER BY precio DESC
+
+test_cases:
+  - id: test-first-is-laptop
+    name: "Laptop Pro 15 primero"
+    test_code: |
+      result = execute_query(user_code)
+      assert result.rows[0]['nombre'] == 'Laptop Pro 15', f"El primer producto debe ser 'Laptop Pro 15', obtuviste '{result.rows[0]['nombre']}'"
+    points: 10
+
+  - id: test-desc-order
+    name: "Orden descendente"
+    test_code: |
+      result = execute_query(user_code)
+      precios = [row['precio'] for row in result.rows]
+      assert precios == sorted(precios, reverse=True), "El orden debe ser descendente (mayor a menor)"
+    points: 5
+
+hints:
+  - "DESC despues del nombre de columna ordena de mayor a menor"
+  - "ORDER BY precio DESC"
+  - "Solucion: SELECT nombre, precio FROM productos ORDER BY precio DESC"
+
+tags:
+  - sql
+  - order-by
+  - desc

@@ -1,0 +1,62 @@
+id: ex-12-top-n
+type: sql
+title: "Top 3 ventas"
+description: "Combina ORDER BY y LIMIT para top N"
+difficulty: intermediate
+estimated_time_minutes: 6
+points: 25
+runtime_tier: pyodide
+
+instructions: |
+  El gerente quiere ver las ventas mas grandes para felicitar a los vendedores.
+
+  **Tu tarea**: Muestra el **vendedor_id**, **fecha** y **monto** de las **3 ventas con mayor monto**.
+
+  Ordena por monto de mayor a menor.
+
+  > Nota: Por ahora solo puedes mostrar `vendedor_id`. En modulos avanzados aprenderas a conectar tablas para ver nombres.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Top 3 ventas mas grandes
+  SELECT vendedor_id, fecha, monto
+  FROM ventas
+
+
+solution_code: |
+  SELECT vendedor_id, fecha, monto FROM ventas ORDER BY monto DESC LIMIT 3
+
+test_cases:
+  - id: test-limit-3
+    name: "Exactamente 3 filas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 3, f"Debes retornar 3 ventas, retornaste {len(result.rows)}"
+    points: 10
+
+  - id: test-order-desc
+    name: "Orden descendente por monto"
+    test_code: |
+      result = execute_query(user_code)
+      montos = [row['monto'] for row in result.rows]
+      assert montos == sorted(montos, reverse=True), "Debe estar ordenado por monto de mayor a menor"
+    points: 10
+
+  - id: test-top-value
+    name: "Venta mas grande correcta"
+    test_code: |
+      result = execute_query(user_code)
+      assert result.rows[0]['monto'] == 3899.97, f"La venta mas grande es $3899.97, obtuviste ${result.rows[0]['monto']}"
+    points: 5
+
+hints:
+  - "Primero ORDER BY para ordenar, luego LIMIT para cortar"
+  - "ORDER BY monto DESC LIMIT 3"
+  - "Solucion: SELECT vendedor_id, fecha, monto FROM ventas ORDER BY monto DESC LIMIT 3"
+
+tags:
+  - sql
+  - order-by
+  - limit
+  - top-n

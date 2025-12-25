@@ -1,0 +1,55 @@
+id: ex-14-sum-avg
+type: sql
+title: "Totales y promedios"
+description: "Calcula SUM y AVG de ventas"
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+instructions: |
+  Finanzas necesita saber el rendimiento general de ventas.
+
+  **Tu tarea**: En una sola consulta, muestra:
+  1. La **suma** de todos los montos (llamalo `total_ventas`)
+  2. El **promedio** de monto por venta (llamalo `ticket_promedio`)
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Total y promedio de ventas
+  SELECT
+      SUM(monto) AS total_ventas,
+
+  FROM ventas
+
+solution_code: |
+  SELECT SUM(monto) AS total_ventas, AVG(monto) AS ticket_promedio FROM ventas
+
+test_cases:
+  - id: test-sum-correct
+    name: "Suma correcta"
+    test_code: |
+      result = execute_query(user_code)
+      total = round(result.rows[0]['total_ventas'], 2)
+      assert abs(total - 17666.18) < 0.1, f"El total debe ser ~17666.18, obtuviste {total}"
+    points: 10
+
+  - id: test-avg-correct
+    name: "Promedio correcto"
+    test_code: |
+      result = execute_query(user_code)
+      avg = round(result.rows[0]['ticket_promedio'], 2)
+      assert abs(avg - 1177.75) < 1, f"El promedio debe ser ~1177.75, obtuviste {avg}"
+    points: 10
+
+hints:
+  - "SUM(monto) suma todos los valores de la columna monto"
+  - "AVG(monto) calcula el promedio"
+  - "Solucion: SELECT SUM(monto) AS total_ventas, AVG(monto) AS ticket_promedio FROM ventas"
+
+tags:
+  - sql
+  - sum
+  - avg
+  - agregacion

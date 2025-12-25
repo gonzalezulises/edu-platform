@@ -1,0 +1,48 @@
+id: ex-05-columnas-ventas
+type: sql
+title: "Columnas de ventas"
+description: "Selecciona fecha y monto de la tabla ventas"
+difficulty: beginner
+estimated_time_minutes: 4
+points: 15
+runtime_tier: pyodide
+
+instructions: |
+  Para un reporte rapido de facturacion, solo necesitas cuando y cuanto.
+
+  **Tu tarea**: De la tabla `ventas`, muestra solo la **fecha** y el **monto**.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Selecciona fecha y monto de ventas
+
+
+solution_code: |
+  SELECT fecha, monto FROM ventas
+
+test_cases:
+  - id: test-correct-columns
+    name: "Columnas fecha y monto"
+    test_code: |
+      result = execute_query(user_code)
+      cols = [c.lower() for c in result.columns]
+      assert 'fecha' in cols and 'monto' in cols, "Debes seleccionar las columnas 'fecha' y 'monto'"
+    points: 10
+
+  - id: test-row-count
+    name: "Todas las ventas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 15, f"Hay 15 ventas. Tu consulta retorna {len(result.rows)}"
+    points: 5
+
+hints:
+  - "Misma estructura: SELECT col1, col2 FROM tabla"
+  - "La tabla es 'ventas', las columnas son 'fecha' y 'monto'"
+  - "Solucion: SELECT fecha, monto FROM ventas"
+
+tags:
+  - sql
+  - select
+  - columnas

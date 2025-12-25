@@ -1,0 +1,52 @@
+id: ex-03-select-ventas
+type: sql
+title: "Explorando transacciones"
+description: "Consulta la tabla de ventas"
+difficulty: beginner
+estimated_time_minutes: 4
+points: 15
+runtime_tier: pyodide
+
+instructions: |
+  La tabla `ventas` contiene las transacciones de la empresa. Cada fila es una venta.
+
+  **Tu tarea**:
+  1. Consulta todos los datos de la tabla `ventas`
+  2. Observa la estructura: que columnas tiene?
+
+  > Nota: Las columnas `vendedor_id` y `producto_id` son **referencias** a otras tablas. Aprenderas a conectarlas mas adelante.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Muestra todas las ventas
+
+
+solution_code: |
+  SELECT * FROM ventas
+
+test_cases:
+  - id: test-correct-table
+    name: "Consulta la tabla ventas"
+    test_code: |
+      result = execute_query(user_code)
+      columns = [c.lower() for c in result.columns]
+      assert 'monto' in columns and 'vendedor_id' in columns, "Asegurate de consultar la tabla 'ventas'"
+    points: 5
+
+  - id: test-all-sales
+    name: "Retorna todas las ventas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 15, f"Hay 15 ventas registradas. Tu consulta retorna {len(result.rows)}"
+    points: 10
+
+hints:
+  - "Misma estructura: SELECT * FROM [nombre_tabla]"
+  - "El nombre de la tabla es 'ventas'"
+  - "Solucion: SELECT * FROM ventas"
+
+tags:
+  - sql
+  - select
+  - ventas

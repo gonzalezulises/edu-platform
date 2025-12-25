@@ -1,0 +1,49 @@
+id: ex-01-select-todo
+type: sql
+title: "Tu primera consulta SELECT"
+description: "Muestra todos los datos de la tabla productos"
+difficulty: beginner
+estimated_time_minutes: 3
+points: 10
+runtime_tier: pyodide
+
+instructions: |
+  La tabla `productos` contiene informacion sobre los productos que vende la empresa.
+
+  **Tu tarea**: Escribe una consulta que muestre **todas las columnas y filas** de la tabla `productos`.
+
+  > Recuerda: `*` significa "todas las columnas"
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Escribe tu consulta aqui
+  SELECT
+
+solution_code: |
+  SELECT * FROM productos
+
+test_cases:
+  - id: test-all-columns
+    name: "Retorna todas las columnas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.columns) == 5, f"La tabla tiene 5 columnas. Tu consulta retorna {len(result.columns)}"
+    points: 5
+
+  - id: test-all-rows
+    name: "Retorna todas las filas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 8, f"La tabla tiene 8 productos. Tu consulta retorna {len(result.rows)}"
+    points: 5
+
+hints:
+  - "La estructura basica es: SELECT [columnas] FROM [tabla]"
+  - "Para seleccionar todas las columnas, usa el asterisco: *"
+  - "Solucion: SELECT * FROM productos"
+
+tags:
+  - sql
+  - select
+  - basico

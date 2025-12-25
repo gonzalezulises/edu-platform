@@ -1,0 +1,52 @@
+id: ex-04-columnas-especificas
+type: sql
+title: "Seleccionando columnas"
+description: "Muestra solo nombre y precio de productos"
+difficulty: beginner
+estimated_time_minutes: 4
+points: 15
+runtime_tier: pyodide
+
+instructions: |
+  No siempre necesitas todas las columnas. Selecciona solo las relevantes.
+
+  **Tu tarea**: Muestra unicamente el **nombre** y **precio** de cada producto.
+
+  > Tip: Lista las columnas separadas por coma despues de SELECT
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Muestra nombre y precio de productos
+  SELECT
+  FROM productos
+
+solution_code: |
+  SELECT nombre, precio FROM productos
+
+test_cases:
+  - id: test-two-columns
+    name: "Exactamente 2 columnas"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.columns) == 2, f"Debes seleccionar exactamente 2 columnas, no {len(result.columns)}"
+    points: 5
+
+  - id: test-correct-columns
+    name: "Columnas correctas"
+    test_code: |
+      result = execute_query(user_code)
+      cols = [c.lower() for c in result.columns]
+      assert 'nombre' in cols, "Falta la columna 'nombre'"
+      assert 'precio' in cols, "Falta la columna 'precio'"
+    points: 10
+
+hints:
+  - "La sintaxis es: SELECT columna1, columna2 FROM tabla"
+  - "Las columnas son: nombre, precio"
+  - "Solucion: SELECT nombre, precio FROM productos"
+
+tags:
+  - sql
+  - select
+  - columnas

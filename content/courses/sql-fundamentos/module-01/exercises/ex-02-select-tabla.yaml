@@ -1,0 +1,48 @@
+id: ex-02-select-tabla
+type: sql
+title: "Consultando vendedores"
+description: "Practica SELECT con otra tabla"
+difficulty: beginner
+estimated_time_minutes: 3
+points: 10
+runtime_tier: pyodide
+
+instructions: |
+  Ahora consulta la tabla `vendedores` para ver quienes trabajan en la empresa.
+
+  **Tu tarea**: Muestra todos los datos de la tabla `vendedores`.
+
+schema_file: "ventas_db.sql"
+
+starter_code: |
+  -- Consulta todos los vendedores
+
+
+solution_code: |
+  SELECT * FROM vendedores
+
+test_cases:
+  - id: test-correct-table
+    name: "Consulta la tabla correcta"
+    test_code: |
+      result = execute_query(user_code)
+      columns = [c.lower() for c in result.columns]
+      assert 'nombre' in columns and 'region' in columns, "Asegurate de consultar la tabla 'vendedores'"
+    points: 5
+
+  - id: test-row-count
+    name: "Retorna 5 vendedores"
+    test_code: |
+      result = execute_query(user_code)
+      assert len(result.rows) == 5, f"Hay 5 vendedores. Tu consulta retorna {len(result.rows)}"
+    points: 5
+
+hints:
+  - "Es la misma estructura que el ejercicio anterior"
+  - "Cambia el nombre de la tabla a 'vendedores'"
+  - "Solucion: SELECT * FROM vendedores"
+
+tags:
+  - sql
+  - select
+  - basico
