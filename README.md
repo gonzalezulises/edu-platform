@@ -371,6 +371,10 @@ El proyecto se despliega automaticamente en **Vercel** con cada push a `main`.
 | Curso | Modulos | Ejercicios | Estado |
 |-------|---------|------------|--------|
 | Introduccion a Python | 1 | 13 | Publicado |
+| Introduccion a Scikit-Learn | 4 | 10 | Publicado |
+| Fundamentos de SQL | 1 | 16 | Publicado |
+
+**Total:** 6 modulos, 39 ejercicios interactivos
 
 ---
 
