@@ -1,0 +1,19 @@
+slug: module-02
+title: "El patron fit/predict"
+description: "Entrenar, predecir y evaluar un clasificador desde cero"
+order: 2
+estimatedDuration: "60min"
+
+lessons:
+  - slug: 02-fit-predict
+    title: "El patron fit/predict: Tu primer modelo"
+    order: 1
+    type: text
+
+exercises:
+  - id: ex-train-test-split
+    title: "Dividir datos con train_test_split"
+  - id: ex-primer-modelo
+    title: "Tu primer modelo de clasificacion"
+  - id: ex-accuracy-analysis
+    title: "Analisis de accuracy"

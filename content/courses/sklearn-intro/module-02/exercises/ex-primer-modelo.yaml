@@ -1,0 +1,125 @@
+id: ex-primer-modelo
+type: code-python
+title: "Tu primer modelo de clasificacion"
+description: |
+  Entrena un modelo de LogisticRegression y evalua su accuracy.
+  Sigue el patron: crear -> fit -> predict -> evaluar
+instructions: |
+  Completa los 4 pasos marcados con TODO para entrenar y evaluar tu primer modelo.
+difficulty: beginner
+estimated_time_minutes: 10
+points: 40
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.metrics import accuracy_score
+  from sklearn.datasets import make_classification
+  import numpy as np
+
+  # Crear dataset sintetico
+  X, y = make_classification(
+      n_samples=200,
+      n_features=10,
+      n_informative=5,
+      random_state=42
+  )
+
+  # Dividir datos
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=42
+  )
+
+  # TODO: Completa los pasos
+
+  # 1. Crear el modelo
+  modelo = None  # Cambia None por LogisticRegression(random_state=42)
+
+  # 2. Entrenar (fit)
+  # modelo.fit(...)
+
+  # 3. Predecir
+  y_pred = None  # modelo.predict(...)
+
+  # 4. Calcular accuracy
+  accuracy = 0  # accuracy_score(...)
+
+  print(f"Accuracy: {accuracy:.2%}")
+
+solution_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.metrics import accuracy_score
+  from sklearn.datasets import make_classification
+  import numpy as np
+
+  # Crear dataset sintetico
+  X, y = make_classification(
+      n_samples=200,
+      n_features=10,
+      n_informative=5,
+      random_state=42
+  )
+
+  # Dividir datos
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=42
+  )
+
+  # 1. Crear el modelo
+  modelo = LogisticRegression(random_state=42)
+
+  # 2. Entrenar (fit)
+  modelo.fit(X_train, y_train)
+
+  # 3. Predecir
+  y_pred = modelo.predict(X_test)
+
+  # 4. Calcular accuracy
+  accuracy = accuracy_score(y_test, y_pred)
+
+  print(f"Accuracy: {accuracy:.2%}")
+
+test_cases:
+  - id: test-modelo-tipo
+    name: "Modelo es LogisticRegression"
+    test_code: |
+      from sklearn.linear_model import LogisticRegression
+      assert isinstance(modelo, LogisticRegression), "Usa LogisticRegression"
+    points: 10
+    error_message: "El modelo debe ser una instancia de LogisticRegression"
+
+  - id: test-modelo-entrenado
+    name: "Modelo esta entrenado"
+    test_code: |
+      assert hasattr(modelo, 'coef_'), "El modelo no esta entrenado"
+    points: 10
+    error_message: "Usa modelo.fit(X_train, y_train) para entrenar"
+
+  - id: test-predicciones
+    name: "y_pred tiene predicciones"
+    test_code: |
+      assert y_pred is not None and len(y_pred) == len(y_test), "y_pred debe tener predicciones"
+    points: 10
+    error_message: "Usa modelo.predict(X_test) para generar predicciones"
+
+  - id: test-accuracy
+    name: "Accuracy calculado correctamente"
+    test_code: |
+      from sklearn.metrics import accuracy_score
+      expected = accuracy_score(y_test, y_pred)
+      assert abs(accuracy - expected) < 0.01, "Accuracy no coincide"
+    points: 10
+    error_message: "Usa accuracy_score(y_test, y_pred)"
+
+hints:
+  - "Paso 1: LogisticRegression(random_state=42)"
+  - "Paso 2: modelo.fit(X_train, y_train)"
+  - "Paso 3: modelo.predict(X_test)"
+  - "Paso 4: accuracy_score(y_test, y_pred)"
+
+tags:
+  - sklearn
+  - clasificacion
+  - logistic-regression

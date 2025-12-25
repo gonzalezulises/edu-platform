@@ -1,0 +1,94 @@
+id: ex-metrics-calculation
+type: code-python
+title: "Calcular metricas de clasificacion"
+description: |
+  Aprende a calcular precision, recall, F1-score y accuracy.
+instructions: |
+  Calcula las 4 metricas fundamentales para evaluar un clasificador.
+difficulty: intermediate
+estimated_time_minutes: 10
+points: 40
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+  import numpy as np
+
+  # Predicciones y valores reales
+  y_true = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 1])
+  y_pred = np.array([1, 0, 1, 0, 0, 1, 1, 0, 1, 0])
+
+  # TODO: Calcula las metricas
+  accuracy = None
+  precision = None
+  recall = None
+  f1 = None
+
+  print(f"Accuracy:  {accuracy}")
+  print(f"Precision: {precision}")
+  print(f"Recall:    {recall}")
+  print(f"F1-Score:  {f1}")
+
+solution_code: |
+  from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+  import numpy as np
+
+  y_true = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 1])
+  y_pred = np.array([1, 0, 1, 0, 0, 1, 1, 0, 1, 0])
+
+  accuracy = accuracy_score(y_true, y_pred)
+  precision = precision_score(y_true, y_pred)
+  recall = recall_score(y_true, y_pred)
+  f1 = f1_score(y_true, y_pred)
+
+  print(f"Accuracy:  {accuracy}")
+  print(f"Precision: {precision}")
+  print(f"Recall:    {recall}")
+  print(f"F1-Score:  {f1}")
+
+test_cases:
+  - id: test-accuracy
+    name: "Accuracy calculado"
+    test_code: |
+      from sklearn.metrics import accuracy_score
+      expected = accuracy_score(y_true, y_pred)
+      assert accuracy is not None and abs(accuracy - expected) < 0.01
+    points: 10
+    error_message: "accuracy = accuracy_score(y_true, y_pred)"
+
+  - id: test-precision
+    name: "Precision calculado"
+    test_code: |
+      from sklearn.metrics import precision_score
+      expected = precision_score(y_true, y_pred)
+      assert precision is not None and abs(precision - expected) < 0.01
+    points: 10
+    error_message: "precision = precision_score(y_true, y_pred)"
+
+  - id: test-recall
+    name: "Recall calculado"
+    test_code: |
+      from sklearn.metrics import recall_score
+      expected = recall_score(y_true, y_pred)
+      assert recall is not None and abs(recall - expected) < 0.01
+    points: 10
+    error_message: "recall = recall_score(y_true, y_pred)"
+
+  - id: test-f1
+    name: "F1-Score calculado"
+    test_code: |
+      from sklearn.metrics import f1_score
+      expected = f1_score(y_true, y_pred)
+      assert f1 is not None and abs(f1 - expected) < 0.01
+    points: 10
+    error_message: "f1 = f1_score(y_true, y_pred)"
+
+hints:
+  - "Todas las funciones reciben (y_true, y_pred)"
+  - "Precision = TP / (TP + FP)"
+  - "Recall = TP / (TP + FN)"
+
+tags:
+  - sklearn
+  - metricas
+  - evaluacion

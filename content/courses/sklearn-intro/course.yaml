@@ -1,0 +1,34 @@
+slug: sklearn-intro
+title: "Introduccion a Scikit-Learn"
+description: "De cero a entrenar y evaluar tu primer modelo de machine learning. Aprende el ecosistema sklearn, el patron fit/predict, preprocesamiento de datos y evaluacion de modelos con metricas de negocio."
+thumbnail: "/images/courses/sklearn-intro.jpg"
+instructor: "EduPlatform"
+level: "intermedio"
+duration: "5 horas"
+language: "es"
+
+prerequisites:
+  - "Python intermedio (funciones, clases basicas)"
+  - "NumPy basico (arrays, operaciones vectorizadas)"
+  - "Pandas basico (DataFrames, seleccion, filtrado)"
+
+learningOutcomes:
+  - "Identificar tipos de problemas que sklearn resuelve"
+  - "Aplicar el patron fit/predict para entrenar modelos"
+  - "Preprocesar datos con scalers, encoders e imputers"
+  - "Evaluar modelos con metricas apropiadas al negocio"
+  - "Ajustar umbrales de decision segun costos"
+
+modules:
+  - slug: module-01
+    title: "El ecosistema de Scikit-Learn"
+    order: 1
+  - slug: module-02
+    title: "El patron fit/predict"
+    order: 2
+  - slug: module-03
+    title: "Preprocesamiento de datos"
+    order: 3
+  - slug: module-04
+    title: "Evaluacion de modelos"
+    order: 4

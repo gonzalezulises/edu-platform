@@ -12,6 +12,7 @@ interface LessonPlayerProps {
   userId?: string
   courseId?: string
   courseSlug?: string
+  moduleId?: string
   isCompleted?: boolean
   onComplete?: () => void
   quiz?: Quiz | null
@@ -21,7 +22,8 @@ export default function LessonPlayer({
   lesson,
   userId,
   courseId,
-  courseSlug = 'python-data-science',
+  courseSlug,
+  moduleId,
   isCompleted = false,
   onComplete,
   quiz
@@ -124,13 +126,13 @@ export default function LessonPlayer({
               <MarkdownRenderer
                 content={lesson.parsedContent}
                 courseSlug={courseSlug}
-                moduleId="module-01"
+                moduleId={moduleId}
               />
             ) : lesson.content ? (
               <MarkdownRenderer
                 content={lesson.content}
                 courseSlug={courseSlug}
-                moduleId="module-01"
+                moduleId={moduleId}
               />
             ) : (
               <p className="text-gray-500">Sin contenido disponible.</p>
@@ -223,7 +225,7 @@ export default function LessonPlayer({
           <MarkdownRenderer
             content={lesson.parsedContent || lesson.content || ''}
             courseSlug={courseSlug}
-            moduleId="module-01"
+            moduleId={moduleId}
           />
         </div>
       )}

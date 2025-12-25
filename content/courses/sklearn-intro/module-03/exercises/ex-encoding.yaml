@@ -1,0 +1,75 @@
+id: ex-encoding
+type: code-python
+title: "Codificar variables categoricas"
+description: |
+  Aprende a convertir variables categoricas a numericas con OneHotEncoder.
+instructions: |
+  Usa OneHotEncoder para codificar la columna 'color'.
+difficulty: intermediate
+estimated_time_minutes: 10
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.preprocessing import OneHotEncoder
+  import numpy as np
+
+  # Datos categoricos
+  colores = np.array([['rojo'], ['azul'], ['verde'], ['rojo'], ['azul']])
+
+  # TODO: Codificar con OneHotEncoder
+  encoder = None  # Crear OneHotEncoder(sparse_output=False)
+
+  colores_encoded = None  # fit_transform
+
+  print("Colores originales:")
+  print(colores.flatten())
+  print("\nColores codificados:")
+  print(colores_encoded)
+
+solution_code: |
+  from sklearn.preprocessing import OneHotEncoder
+  import numpy as np
+
+  colores = np.array([['rojo'], ['azul'], ['verde'], ['rojo'], ['azul']])
+
+  encoder = OneHotEncoder(sparse_output=False)
+  colores_encoded = encoder.fit_transform(colores)
+
+  print("Colores originales:")
+  print(colores.flatten())
+  print("\nColores codificados:")
+  print(colores_encoded)
+
+test_cases:
+  - id: test-encoder
+    name: "Encoder creado"
+    test_code: |
+      from sklearn.preprocessing import OneHotEncoder
+      assert isinstance(encoder, OneHotEncoder)
+    points: 10
+    error_message: "Crea un OneHotEncoder(sparse_output=False)"
+
+  - id: test-shape
+    name: "Shape correcto (5, 3)"
+    test_code: |
+      assert colores_encoded is not None
+      assert colores_encoded.shape == (5, 3)
+    points: 10
+    error_message: "Deben ser 5 filas y 3 columnas (una por color)"
+
+  - id: test-values
+    name: "Valores binarios"
+    test_code: |
+      assert set(colores_encoded.flatten()) == {0.0, 1.0}
+    points: 10
+    error_message: "Los valores deben ser 0 o 1"
+
+hints:
+  - "OneHotEncoder(sparse_output=False) para obtener array denso"
+  - "Cada categoria se convierte en una columna binaria"
+
+tags:
+  - sklearn
+  - preprocesamiento
+  - encoding

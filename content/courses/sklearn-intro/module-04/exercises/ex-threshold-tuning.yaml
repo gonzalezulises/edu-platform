@@ -1,0 +1,98 @@
+id: ex-threshold-tuning
+type: code-python
+title: "Ajustar umbral de decision"
+description: |
+  Aprende a cambiar el umbral de clasificacion para balancear precision y recall.
+instructions: |
+  Usa predict_proba y ajusta el umbral para obtener mayor recall.
+difficulty: advanced
+estimated_time_minutes: 12
+points: 40
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.model_selection import train_test_split
+  from sklearn.datasets import make_classification
+  from sklearn.metrics import precision_score, recall_score
+  import numpy as np
+
+  # Dataset
+  X, y = make_classification(n_samples=200, n_features=10, random_state=42)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  # Modelo
+  modelo = LogisticRegression(random_state=42)
+  modelo.fit(X_train, y_train)
+
+  # Prediccion default (umbral=0.5)
+  y_pred_default = modelo.predict(X_test)
+
+  # TODO: Obtener probabilidades y usar umbral=0.3
+  y_proba = None  # modelo.predict_proba(X_test)[:, 1]
+  umbral = 0.3
+  y_pred_custom = None  # (y_proba >= umbral).astype(int)
+
+  print(f"Umbral 0.5 - Precision: {precision_score(y_test, y_pred_default):.2f}, Recall: {recall_score(y_test, y_pred_default):.2f}")
+  if y_pred_custom is not None:
+      print(f"Umbral {umbral} - Precision: {precision_score(y_test, y_pred_custom):.2f}, Recall: {recall_score(y_test, y_pred_custom):.2f}")
+
+solution_code: |
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.model_selection import train_test_split
+  from sklearn.datasets import make_classification
+  from sklearn.metrics import precision_score, recall_score
+  import numpy as np
+
+  X, y = make_classification(n_samples=200, n_features=10, random_state=42)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  modelo = LogisticRegression(random_state=42)
+  modelo.fit(X_train, y_train)
+
+  y_pred_default = modelo.predict(X_test)
+
+  y_proba = modelo.predict_proba(X_test)[:, 1]
+  umbral = 0.3
+  y_pred_custom = (y_proba >= umbral).astype(int)
+
+  print(f"Umbral 0.5 - Precision: {precision_score(y_test, y_pred_default):.2f}, Recall: {recall_score(y_test, y_pred_default):.2f}")
+  print(f"Umbral {umbral} - Precision: {precision_score(y_test, y_pred_custom):.2f}, Recall: {recall_score(y_test, y_pred_custom):.2f}")
+
+test_cases:
+  - id: test-proba
+    name: "Probabilidades obtenidas"
+    test_code: |
+      assert y_proba is not None
+      assert len(y_proba) == len(y_test)
+      assert all(0 <= p <= 1 for p in y_proba)
+    points: 15
+    error_message: "y_proba = modelo.predict_proba(X_test)[:, 1]"
+
+  - id: test-custom-pred
+    name: "Predicciones con umbral custom"
+    test_code: |
+      assert y_pred_custom is not None
+      assert set(y_pred_custom).issubset({0, 1})
+    points: 15
+    error_message: "y_pred_custom = (y_proba >= umbral).astype(int)"
+
+  - id: test-recall-increase
+    name: "Recall aumenta con umbral bajo"
+    test_code: |
+      from sklearn.metrics import recall_score
+      recall_default = recall_score(y_test, y_pred_default)
+      recall_custom = recall_score(y_test, y_pred_custom)
+      assert recall_custom >= recall_default - 0.1
+    points: 10
+    error_message: "Un umbral mas bajo deberia aumentar el recall"
+
+hints:
+  - "predict_proba retorna probabilidades para cada clase"
+  - "[:, 1] selecciona la probabilidad de clase positiva"
+  - "Umbral bajo = mas positivos predichos = mas recall, menos precision"
+
+tags:
+  - sklearn
+  - umbral
+  - evaluacion

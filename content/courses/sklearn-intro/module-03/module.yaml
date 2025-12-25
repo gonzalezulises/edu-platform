@@ -1,0 +1,19 @@
+slug: module-03
+title: "Preprocesamiento de datos"
+description: "Transformar datos crudos en features listas para modelos"
+order: 3
+estimatedDuration: "75min"
+
+lessons:
+  - slug: 03-preprocesamiento
+    title: "Preprocesamiento de datos"
+    order: 1
+    type: text
+
+exercises:
+  - id: ex-scaling
+    title: "Escalar features numericas"
+  - id: ex-encoding
+    title: "Codificar variables categoricas"
+  - id: ex-imputation
+    title: "Manejar valores faltantes"

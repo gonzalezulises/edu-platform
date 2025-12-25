@@ -1,0 +1,95 @@
+id: ex-accuracy-analysis
+type: code-python
+title: "Analisis de Accuracy: Train vs Test"
+description: |
+  Compara el accuracy en train vs test para detectar overfitting.
+instructions: |
+  Calcula el accuracy tanto en train como en test y analiza la diferencia.
+  Si train >> test, hay overfitting.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.metrics import accuracy_score
+  from sklearn.datasets import make_classification
+
+  # Dataset
+  X, y = make_classification(n_samples=200, n_features=10, random_state=42)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  # Modelo entrenado
+  modelo = LogisticRegression(random_state=42)
+  modelo.fit(X_train, y_train)
+
+  # TODO: Calcula accuracy en train y en test
+  y_pred_train = None  # Predicciones en train
+  y_pred_test = None   # Predicciones en test
+
+  accuracy_train = 0  # Accuracy en train
+  accuracy_test = 0   # Accuracy en test
+
+  print(f"Accuracy Train: {accuracy_train:.2%}")
+  print(f"Accuracy Test: {accuracy_test:.2%}")
+  print(f"Diferencia: {accuracy_train - accuracy_test:.2%}")
+
+solution_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.metrics import accuracy_score
+  from sklearn.datasets import make_classification
+
+  # Dataset
+  X, y = make_classification(n_samples=200, n_features=10, random_state=42)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  # Modelo entrenado
+  modelo = LogisticRegression(random_state=42)
+  modelo.fit(X_train, y_train)
+
+  # Predicciones
+  y_pred_train = modelo.predict(X_train)
+  y_pred_test = modelo.predict(X_test)
+
+  # Accuracy
+  accuracy_train = accuracy_score(y_train, y_pred_train)
+  accuracy_test = accuracy_score(y_test, y_pred_test)
+
+  print(f"Accuracy Train: {accuracy_train:.2%}")
+  print(f"Accuracy Test: {accuracy_test:.2%}")
+  print(f"Diferencia: {accuracy_train - accuracy_test:.2%}")
+
+test_cases:
+  - id: test-pred-train
+    name: "Predicciones en train"
+    test_code: |
+      assert y_pred_train is not None and len(y_pred_train) == len(y_train)
+    points: 10
+    error_message: "Usa modelo.predict(X_train)"
+
+  - id: test-pred-test
+    name: "Predicciones en test"
+    test_code: |
+      assert y_pred_test is not None and len(y_pred_test) == len(y_test)
+    points: 10
+    error_message: "Usa modelo.predict(X_test)"
+
+  - id: test-accuracy-values
+    name: "Accuracy calculados"
+    test_code: |
+      assert accuracy_train > 0 and accuracy_test > 0
+      assert accuracy_train <= 1 and accuracy_test <= 1
+    points: 10
+    error_message: "Los accuracy deben estar entre 0 y 1"
+
+hints:
+  - "y_pred_train = modelo.predict(X_train)"
+  - "accuracy_train = accuracy_score(y_train, y_pred_train)"
+
+tags:
+  - sklearn
+  - accuracy
+  - overfitting

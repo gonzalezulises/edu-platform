@@ -1,0 +1,91 @@
+id: ex-scaling
+type: code-python
+title: "Escalar features con StandardScaler"
+description: |
+  Aprende a normalizar features numericas para algoritmos sensibles a escala.
+instructions: |
+  Usa StandardScaler para escalar X_train y X_test.
+  Recuerda: fit solo en train, transform en ambos.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.preprocessing import StandardScaler
+  from sklearn.model_selection import train_test_split
+  import numpy as np
+
+  # Datos con diferentes escalas
+  np.random.seed(42)
+  X = np.column_stack([
+      np.random.normal(100, 15, 100),   # Feature 1: media=100
+      np.random.normal(0.5, 0.1, 100),  # Feature 2: media=0.5
+  ])
+  y = np.random.randint(0, 2, 100)
+
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  # TODO: Escalar los datos
+  scaler = None  # Crear StandardScaler
+
+  X_train_scaled = None  # fit_transform en train
+  X_test_scaled = None   # solo transform en test
+
+  print(f"Media train antes: {X_train.mean(axis=0)}")
+  print(f"Media train despues: {X_train_scaled.mean(axis=0) if X_train_scaled is not None else 'N/A'}")
+
+solution_code: |
+  from sklearn.preprocessing import StandardScaler
+  from sklearn.model_selection import train_test_split
+  import numpy as np
+
+  np.random.seed(42)
+  X = np.column_stack([
+      np.random.normal(100, 15, 100),
+      np.random.normal(0.5, 0.1, 100),
+  ])
+  y = np.random.randint(0, 2, 100)
+
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+  scaler = StandardScaler()
+  X_train_scaled = scaler.fit_transform(X_train)
+  X_test_scaled = scaler.transform(X_test)
+
+  print(f"Media train antes: {X_train.mean(axis=0)}")
+  print(f"Media train despues: {X_train_scaled.mean(axis=0)}")
+
+test_cases:
+  - id: test-scaler
+    name: "Scaler creado"
+    test_code: |
+      from sklearn.preprocessing import StandardScaler
+      assert isinstance(scaler, StandardScaler)
+    points: 10
+    error_message: "Crea un StandardScaler()"
+
+  - id: test-scaled-mean
+    name: "Media cercana a 0"
+    test_code: |
+      assert X_train_scaled is not None
+      assert abs(X_train_scaled.mean()) < 0.1
+    points: 10
+    error_message: "Despues de escalar, la media debe ser ~0"
+
+  - id: test-no-leakage
+    name: "Sin data leakage"
+    test_code: |
+      assert hasattr(scaler, 'mean_')
+    points: 10
+    error_message: "Usa fit_transform en train, solo transform en test"
+
+hints:
+  - "scaler = StandardScaler()"
+  - "X_train_scaled = scaler.fit_transform(X_train)"
+  - "X_test_scaled = scaler.transform(X_test)  # NO fit_transform!"
+
+tags:
+  - sklearn
+  - preprocesamiento
+  - scaling

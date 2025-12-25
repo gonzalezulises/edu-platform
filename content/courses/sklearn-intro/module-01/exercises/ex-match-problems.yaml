@@ -1,0 +1,79 @@
+id: ex-match-problems
+type: code-python
+title: "Identificar tipos de problemas ML"
+description: |
+  Aprende a identificar si un problema es clasificacion, regresion, clustering o reduccion dimensional.
+instructions: |
+  Completa el diccionario indicando el tipo de problema para cada caso.
+difficulty: beginner
+estimated_time_minutes: 5
+points: 20
+runtime_tier: pyodide
+
+starter_code: |
+  # Tipos de problemas en ML
+  # - "clasificacion": predecir categoria
+  # - "regresion": predecir numero continuo
+  # - "clustering": agrupar sin etiquetas
+  # - "reduccion": reducir dimensiones
+
+  problemas = {
+      "spam_o_no_spam": None,      # Email es spam o no?
+      "precio_casa": None,          # Precio de una casa?
+      "segmentos_clientes": None,   # Agrupar clientes similares
+      "visualizar_datos": None,     # Reducir 100 features a 2 para graficar
+  }
+
+  # Imprime tus respuestas
+  for problema, tipo in problemas.items():
+      print(f"{problema}: {tipo}")
+
+solution_code: |
+  problemas = {
+      "spam_o_no_spam": "clasificacion",
+      "precio_casa": "regresion",
+      "segmentos_clientes": "clustering",
+      "visualizar_datos": "reduccion",
+  }
+
+  for problema, tipo in problemas.items():
+      print(f"{problema}: {tipo}")
+
+test_cases:
+  - id: test-spam
+    name: "Spam es clasificacion"
+    test_code: |
+      assert problemas["spam_o_no_spam"] == "clasificacion"
+    points: 5
+    error_message: "Predecir spam/no-spam es clasificacion"
+
+  - id: test-precio
+    name: "Precio es regresion"
+    test_code: |
+      assert problemas["precio_casa"] == "regresion"
+    points: 5
+    error_message: "Predecir precio (numero continuo) es regresion"
+
+  - id: test-segmentos
+    name: "Segmentos es clustering"
+    test_code: |
+      assert problemas["segmentos_clientes"] == "clustering"
+    points: 5
+    error_message: "Agrupar sin etiquetas es clustering"
+
+  - id: test-visualizar
+    name: "Visualizar es reduccion"
+    test_code: |
+      assert problemas["visualizar_datos"] == "reduccion"
+    points: 5
+    error_message: "Reducir dimensiones es reduccion dimensional"
+
+hints:
+  - "Clasificacion: salida es categoria (spam/no-spam, si/no)"
+  - "Regresion: salida es numero continuo (precio, temperatura)"
+  - "Clustering: no hay etiquetas, solo agrupamos"
+  - "Reduccion: reducir numero de features"
+
+tags:
+  - sklearn
+  - conceptos

@@ -1,0 +1,71 @@
+id: ex-metric-selection
+type: code-python
+title: "Elegir la metrica correcta"
+description: |
+  Aprende a seleccionar la metrica segun el costo de los errores.
+instructions: |
+  Para cada escenario, indica que metrica maximizarias.
+difficulty: intermediate
+estimated_time_minutes: 8
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  # Elige la metrica correcta para cada escenario
+  # Opciones: "precision", "recall", "f1", "accuracy"
+
+  escenarios = {
+      # Detectar cancer: mejor detectar de mas que perder un caso real
+      "diagnostico_cancer": None,
+
+      # Filtro spam: mejor dejar pasar spam que perder email importante
+      "filtro_spam": None,
+
+      # Clases balanceadas, errores igual de costosos
+      "clasificacion_general": None,
+  }
+
+  for escenario, metrica in escenarios.items():
+      print(f"{escenario}: {metrica}")
+
+solution_code: |
+  escenarios = {
+      "diagnostico_cancer": "recall",
+      "filtro_spam": "precision",
+      "clasificacion_general": "f1",
+  }
+
+  for escenario, metrica in escenarios.items():
+      print(f"{escenario}: {metrica}")
+
+test_cases:
+  - id: test-cancer
+    name: "Cancer requiere alto recall"
+    test_code: |
+      assert escenarios["diagnostico_cancer"] == "recall"
+    points: 10
+    error_message: "En cancer, un falso negativo es muy costoso -> maximiza recall"
+
+  - id: test-spam
+    name: "Spam requiere alta precision"
+    test_code: |
+      assert escenarios["filtro_spam"] == "precision"
+    points: 10
+    error_message: "En spam, un falso positivo (perder email) es costoso -> maximiza precision"
+
+  - id: test-general
+    name: "General usa F1"
+    test_code: |
+      assert escenarios["clasificacion_general"] in ["f1", "accuracy"]
+    points: 10
+    error_message: "Con errores balanceados, usa F1 o accuracy"
+
+hints:
+  - "Recall alto: minimiza falsos negativos (no perder casos positivos)"
+  - "Precision alta: minimiza falsos positivos (no generar alarmas falsas)"
+  - "F1: balance entre precision y recall"
+
+tags:
+  - sklearn
+  - metricas
+  - evaluacion

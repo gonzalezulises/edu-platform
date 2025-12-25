@@ -274,6 +274,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
               lesson={lessonWithType}
               userId={user?.id}
               courseId={courseId}
+              courseSlug={lesson.course?.slug}
+              moduleId={lesson.module?.order_index !== undefined
+                ? `module-${String(lesson.module.order_index).padStart(2, '0')}`
+                : undefined}
               isCompleted={isCompleted}
               quiz={quiz}
             />

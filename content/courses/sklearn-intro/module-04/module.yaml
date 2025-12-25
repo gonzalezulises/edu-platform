@@ -1,0 +1,19 @@
+slug: module-04
+title: "Evaluacion de modelos"
+description: "Metricas de clasificacion y como elegir la correcta segun el problema"
+order: 4
+estimatedDuration: "70min"
+
+lessons:
+  - slug: 04-evaluacion
+    title: "Evaluacion de modelos"
+    order: 1
+    type: text
+
+exercises:
+  - id: ex-metrics-calculation
+    title: "Calcular metricas de clasificacion"
+  - id: ex-metric-selection
+    title: "Elegir la metrica correcta"
+  - id: ex-threshold-tuning
+    title: "Ajustar umbral de decision"

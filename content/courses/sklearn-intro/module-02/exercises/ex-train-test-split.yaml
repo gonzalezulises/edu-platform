@@ -1,0 +1,69 @@
+id: ex-train-test-split
+type: code-python
+title: "Dividir datos con train_test_split"
+description: |
+  Aprende a separar datos en conjuntos de entrenamiento y prueba.
+instructions: |
+  Usa train_test_split para dividir X e y en conjuntos de train y test.
+  Configura test_size=0.2, random_state=42, y stratify=y.
+difficulty: beginner
+estimated_time_minutes: 5
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.datasets import make_classification
+  import numpy as np
+
+  # Crear dataset
+  X, y = make_classification(n_samples=100, n_features=5, random_state=42)
+
+  # TODO: Divide los datos usando train_test_split
+  # Parametros: test_size=0.2, random_state=42, stratify=y
+  X_train, X_test, y_train, y_test = None, None, None, None
+
+  print(f"Train: {len(X_train) if X_train is not None else 0} muestras")
+  print(f"Test: {len(X_test) if X_test is not None else 0} muestras")
+
+solution_code: |
+  from sklearn.model_selection import train_test_split
+  from sklearn.datasets import make_classification
+  import numpy as np
+
+  # Crear dataset
+  X, y = make_classification(n_samples=100, n_features=5, random_state=42)
+
+  # Dividir datos
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=42, stratify=y
+  )
+
+  print(f"Train: {len(X_train)} muestras")
+  print(f"Test: {len(X_test)} muestras")
+
+test_cases:
+  - id: test-split-sizes
+    name: "Tamaños correctos (80/20)"
+    test_code: |
+      assert X_train is not None and len(X_train) == 80, "X_train debe tener 80 muestras"
+      assert X_test is not None and len(X_test) == 20, "X_test debe tener 20 muestras"
+    points: 15
+    error_message: "Usa test_size=0.2 para dividir 80/20"
+
+  - id: test-stratify
+    name: "Estratificacion correcta"
+    test_code: |
+      train_ratio = y_train.mean()
+      test_ratio = y_test.mean()
+      assert abs(train_ratio - test_ratio) < 0.1, "Proporciones deben ser similares"
+    points: 15
+    error_message: "Usa stratify=y para mantener proporciones"
+
+hints:
+  - "train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)"
+  - "Retorna 4 arrays: X_train, X_test, y_train, y_test"
+
+tags:
+  - sklearn
+  - train-test-split

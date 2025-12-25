@@ -1,0 +1,90 @@
+id: ex-imputation
+type: code-python
+title: "Imputar valores faltantes"
+description: |
+  Aprende a manejar valores NaN con SimpleImputer.
+instructions: |
+  Usa SimpleImputer con strategy='median' para rellenar valores faltantes.
+difficulty: beginner
+estimated_time_minutes: 8
+points: 30
+runtime_tier: pyodide
+
+starter_code: |
+  from sklearn.impute import SimpleImputer
+  import numpy as np
+
+  # Datos con valores faltantes
+  X = np.array([
+      [1, 2],
+      [np.nan, 3],
+      [7, np.nan],
+      [4, 5],
+      [np.nan, 6]
+  ])
+
+  print("Datos originales:")
+  print(X)
+
+  # TODO: Imputar con mediana
+  imputer = None  # SimpleImputer(strategy='median')
+
+  X_clean = None  # fit_transform
+
+  print("\nDatos imputados:")
+  print(X_clean)
+
+solution_code: |
+  from sklearn.impute import SimpleImputer
+  import numpy as np
+
+  X = np.array([
+      [1, 2],
+      [np.nan, 3],
+      [7, np.nan],
+      [4, 5],
+      [np.nan, 6]
+  ])
+
+  print("Datos originales:")
+  print(X)
+
+  imputer = SimpleImputer(strategy='median')
+  X_clean = imputer.fit_transform(X)
+
+  print("\nDatos imputados:")
+  print(X_clean)
+
+test_cases:
+  - id: test-imputer
+    name: "Imputer creado"
+    test_code: |
+      from sklearn.impute import SimpleImputer
+      assert isinstance(imputer, SimpleImputer)
+      assert imputer.strategy == 'median'
+    points: 10
+    error_message: "Usa SimpleImputer(strategy='median')"
+
+  - id: test-no-nans
+    name: "Sin valores NaN"
+    test_code: |
+      assert X_clean is not None
+      assert not np.isnan(X_clean).any()
+    points: 10
+    error_message: "No deben quedar valores NaN"
+
+  - id: test-shape
+    name: "Shape preservado"
+    test_code: |
+      assert X_clean.shape == X.shape
+    points: 10
+    error_message: "El shape debe mantenerse igual"
+
+hints:
+  - "SimpleImputer(strategy='median')"
+  - "fit_transform(X) aprende y transforma en un paso"
+
+tags:
+  - sklearn
+  - preprocesamiento
+  - missing-values

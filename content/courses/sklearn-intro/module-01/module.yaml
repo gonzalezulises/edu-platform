@@ -1,0 +1,15 @@
+slug: module-01
+title: "El ecosistema de Scikit-Learn"
+description: "Entender que es sklearn, su API consistente, y cuando usarlo vs alternativas"
+order: 1
+estimatedDuration: "45min"
+
+lessons:
+  - slug: 01-ecosistema
+    title: "El ecosistema de Scikit-Learn"
+    order: 1
+    type: text
+
+exercises:
+  - id: ex-match-problems
+    title: "Relacionar problemas con tipos de ML"
