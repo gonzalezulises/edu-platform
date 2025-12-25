@@ -1,5 +1,8 @@
 # EduPlatform - Contexto del Proyecto
 
+> **Configuracion Local:** Para rutas absolutas, credenciales y project refs especificos de tu entorno,
+> crea `CLAUDE.local.md` basandote en `CLAUDE.local.example.md`.
+
 ## Descripcion
 Plataforma educativa con cursos, lecciones, **ejercicios interactivos de codigo**, quizzes y tracking de progreso.
 
@@ -91,13 +94,7 @@ Tablas principales:
 
 ## Variables de Entorno
 
-**Archivo de credenciales local:** `~/.edu-platform-credentials`
-
-Contiene todas las claves, tokens y configuracion del proyecto.
-Para cargar en una nueva sesion:
-```bash
-cat ~/.edu-platform-credentials
-```
+Las credenciales se configuran localmente. Ver `CLAUDE.local.md` para rutas especificas.
 
 Variables requeridas en `.env.local`:
 ```

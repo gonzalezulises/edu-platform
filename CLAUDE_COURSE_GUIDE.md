@@ -4,67 +4,40 @@
 
 Este documento contiene toda la informacion necesaria para crear un nuevo curso con ejercicios interactivos en EduPlatform desde una sesion nueva de Claude Code.
 
+> **Configuracion Local:** Las rutas absolutas, credenciales y project refs estan en `CLAUDE.local.md`.
+> Si no lo tienes, crea uno desde `CLAUDE.local.example.md` o ejecuta `./scripts/setup-local.sh`.
+
 ---
 
 ## Como Iniciar una Nueva Sesion de Claude Code
 
 ### Repositorio GitHub
 
-```
-https://github.com/gonzalezulises/edu-platform.git
-```
-
-Si no tienes el proyecto clonado:
+Clona o haz fork del repositorio:
 ```bash
-git clone https://github.com/gonzalezulises/edu-platform.git
+git clone https://github.com/[tu-usuario]/edu-platform.git
 cd edu-platform
 npm install
 ```
 
-### Opcion A: Iniciar desde el proyecto (Recomendado)
+### Iniciar Sesion
 
 ```bash
-cd /Users/ulisesgonzalez/Documents/data_science_projects/edu-platform
+cd [ruta-a-tu-proyecto]
 claude
 ```
 
 Luego en el prompt:
 ```
-Lee CLAUDE_COURSE_GUIDE.md y ~/.edu-platform-credentials.
+Lee CLAUDE_COURSE_GUIDE.md y CLAUDE.local.md.
 Quiero crear un curso de [TEMA] con el diseño en [RUTA_AL_ZIP].
 ```
-
-### Opcion B: Usar rutas absolutas
-
-```bash
-claude "Lee /Users/ulisesgonzalez/Documents/data_science_projects/edu-platform/CLAUDE_COURSE_GUIDE.md y ~/.edu-platform-credentials. Quiero crear un curso de [TEMA] con el diseño en /ruta/completa/al/archivo.zip"
-```
-
-### Rutas Importantes
-
-| Recurso | Ruta Absoluta |
-|---------|---------------|
-| Proyecto | `/Users/ulisesgonzalez/Documents/data_science_projects/edu-platform` |
-| Esta guia | `/Users/ulisesgonzalez/Documents/data_science_projects/edu-platform/CLAUDE_COURSE_GUIDE.md` |
-| Credenciales | `~/.edu-platform-credentials` |
-| Contenido cursos | `/Users/ulisesgonzalez/Documents/data_science_projects/edu-platform/content/courses/` |
-| Migraciones | `/Users/ulisesgonzalez/Documents/data_science_projects/edu-platform/supabase/migrations/` |
 
 ---
 
 ## IMPORTANTE: Credenciales Locales
 
-Antes de comenzar, lee el archivo de credenciales:
-```bash
-cat ~/.edu-platform-credentials
-```
-
-Este archivo contiene:
-- URLs y claves de Supabase
-- Token de acceso para CLI
-- Rutas del proyecto
-- IDs de cursos existentes
-- Comandos utiles
+Antes de comenzar, verifica tu configuracion local en `CLAUDE.local.md`.
 
 **NO se necesita Connection String URI ni conexion directa a PostgreSQL.**
 - Frontend usa Supabase JS Client (`NEXT_PUBLIC_SUPABASE_URL` + `ANON_KEY`)
@@ -75,7 +48,7 @@ Este archivo contiene:
 ## Tabla de Contenidos
 
 1. [Como Iniciar una Nueva Sesion](#como-iniciar-una-nueva-sesion-de-claude-code)
-2. [Credenciales Locales](#importante-credenciales-locales)
+2. [Configuracion Local](#importante-credenciales-locales)
 3. [Resumen del Proyecto](#resumen-del-proyecto)
 4. [Arquitectura del Sistema de Ejercicios](#arquitectura-del-sistema-de-ejercicios)
 5. [Paso a Paso: Crear un Nuevo Curso](#paso-a-paso-crear-un-nuevo-curso)
@@ -680,16 +653,14 @@ ON CONFLICT (id) DO UPDATE SET
 **Paso 1: Verificar que el proyecto esta linkeado**
 
 ```bash
-cd /Users/ulisesgonzalez/Documents/data_science_projects/edu-platform
-
 # Verificar estado del link
 cat supabase/.temp/project-ref
-# Debe mostrar: mcssewqlcyfsuznuvtmh
+# Debe mostrar tu SUPABASE_PROJECT_REF (ver CLAUDE.local.md)
 ```
 
 Si no esta linkeado:
 ```bash
-source .env.local && supabase link --project-ref mcssewqlcyfsuznuvtmh
+source .env.local && supabase link --project-ref $SUPABASE_PROJECT_REF
 ```
 
 **Paso 2: Aplicar migraciones**
@@ -706,8 +677,7 @@ source .env.local && supabase migration list
 
 ### Verificar en Supabase Dashboard
 
-Despues de aplicar, verifica los datos en:
-- https://supabase.com/dashboard/project/mcssewqlcyfsuznuvtmh/editor
+Despues de aplicar, verifica los datos en tu Supabase Dashboard (URL en `CLAUDE.local.md`).
 
 Tablas a verificar:
 - `courses` - nuevo curso insertado
@@ -795,8 +765,8 @@ Si la migracion SQL falla por RLS:
 - [ ] Insertar `<!-- exercise:id -->` en las lecciones
 
 ### Base de Datos (Supabase)
-- [ ] Verificar link: `cat supabase/.temp/project-ref` (debe mostrar `mcssewqlcyfsuznuvtmh`)
-- [ ] Si no esta linkeado: `source .env.local && supabase link --project-ref mcssewqlcyfsuznuvtmh`
+- [ ] Verificar link: `cat supabase/.temp/project-ref` (debe mostrar tu project-ref)
+- [ ] Si no esta linkeado: `source .env.local && supabase link --project-ref $SUPABASE_PROJECT_REF`
 - [ ] Crear migracion SQL en `supabase/migrations/YYYYMMDDHHMMSS_seed_[curso].sql`
 - [ ] Aplicar: `source .env.local && supabase db push --linked`
 - [ ] Verificar: `source .env.local && supabase migration list`
