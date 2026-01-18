@@ -1,0 +1,24 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Cada 6 días a las 8:00 UTC (3:00 AM Panamá)
+    - cron: '0 8 */6 * *'
+  workflow_dispatch: # Permite ejecución manual para testing
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://mcssewqlcyfsuznuvtmh.supabase.co/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}")
+          echo "Response: $response"
+          if [ "$response" -ge 200 ] && [ "$response" -lt 400 ]; then
+            echo "✅ Supabase is alive"
+          else
+            echo "⚠️ Unexpected response: $response"
+            exit 1
+          fi
