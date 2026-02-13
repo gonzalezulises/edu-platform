@@ -2,8 +2,9 @@ name: Supabase Keep-Alive
 
 on:
   schedule:
-    # Cada 6 días a las 8:00 UTC (3:00 AM Panamá)
-    - cron: '0 8 */6 * *'
+    # Cada 4 días a las 8:00 UTC (3:00 AM Panamá)
+    # Margen seguro: Supabase pausa free-tier a los 7 días de inactividad
+    - cron: '0 8 */4 * *'
   workflow_dispatch: # Permite ejecución manual para testing
 
 jobs:
@@ -12,13 +13,22 @@ jobs:
     steps:
       - name: Ping Supabase
         run: |
+          SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "⚠️ SUPABASE_URL secret not configured. Skipping."
+            echo "Set SUPABASE_URL and SUPABASE_ANON_KEY secrets to enable keep-alive."
+            exit 0
+          fi
           response=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://mcssewqlcyfsuznuvtmh.supabase.co/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}")
+            "${SUPABASE_URL}/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            --max-time 10 \
+            --retry 2 \
+            --retry-delay 5)
           echo "Response: $response"
           if [ "$response" -ge 200 ] && [ "$response" -lt 400 ]; then
-            echo "✅ Supabase is alive"
+            echo "Supabase is alive"
           else
-            echo "⚠️ Unexpected response: $response"
+            echo "Unexpected response: $response"
             exit 1
           fi

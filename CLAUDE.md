@@ -1,5 +1,8 @@
 # EduPlatform - Contexto del Proyecto
 
+> **ESTADO ACTUAL:** El proyecto Supabase fue eliminado y necesita recrearse.
+> Lee `RECOVERY_STATE.md` para los pasos pendientes antes de cualquier trabajo con backend/migraciones.
+
 > **Configuracion Local:** Para rutas absolutas, credenciales y project refs especificos de tu entorno,
 > crea `CLAUDE.local.md` basandote en `CLAUDE.local.example.md`.
 
